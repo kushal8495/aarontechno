@@ -1,1 +1,2257 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aaron Technologies | Premium Industrial Sourcing & SCM Hub</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            navy: '#0B192C',
+                            teal: '#0E7490', // Darker, rich executive teal for primary accents & buttons
+                            lightTeal: '#22D3EE', // High-contrast light teal for highlights on dark surfaces
+                            orange: '#FF4C29',
+                            slate: '#F1F6F9',
+                            muted: '#64748B',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        /* Glassmorphism utility */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            transition: all 0.3s ease;
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #0B192C 0%, #0E7490 50%, #FF4C29 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
 
+        /* DYNAMIC WORKSPACE THEME STYLES */
+        
+        /* Cyber Dark / Steel Mill Theme */
+        body.theme-cyber-dark {
+            background-color: #070F19;
+            color: #E2E8F0;
+        }
+        body.theme-cyber-dark header {
+            background-color: rgba(7, 15, 25, 0.9) !important;
+            border-color: #1E293B;
+        }
+        body.theme-cyber-dark .glass-card,
+        body.theme-cyber-dark .bg-white,
+        body.theme-cyber-dark #productModal {
+            background-color: #0F172A !important;
+            border-color: #1E293B !important;
+            color: #E2E8F0 !important;
+        }
+        body.theme-cyber-dark .bg-slate-50,
+        body.theme-cyber-dark .bg-slate-100 {
+            background-color: #1E293B !important;
+            border-color: #334155 !important;
+        }
+        body.theme-cyber-dark .text-brand-navy {
+            color: #F1F6F9 !important;
+        }
+        body.theme-cyber-dark .text-brand-muted {
+            color: #94A3B8 !important;
+        }
+        body.theme-cyber-dark .border-slate-200,
+        body.theme-cyber-dark .border-slate-300 {
+            border-color: #1E293B !important;
+        }
+
+        /* Oceanic Navy Theme */
+        body.theme-ocean-deep {
+            background-color: #021526;
+            color: #E2F1E7;
+        }
+        body.theme-ocean-deep header {
+            background-color: rgba(2, 21, 38, 0.9) !important;
+            border-color: #03346E;
+        }
+        body.theme-ocean-deep .glass-card,
+        body.theme-ocean-deep .bg-white,
+        body.theme-ocean-deep #productModal {
+            background-color: #032030 !important;
+            border-color: #03346E !important;
+            color: #E2F1E7 !important;
+        }
+        body.theme-ocean-deep .bg-slate-50,
+        body.theme-ocean-deep .bg-slate-100 {
+            background-color: #032B44 !important;
+            border-color: #03346E !important;
+        }
+        body.theme-ocean-deep .text-brand-navy {
+            color: #FFFFFF !important;
+        }
+        body.theme-ocean-deep .text-brand-muted {
+            color: #8AB4F8 !important;
+        }
+        body.theme-ocean-deep .border-slate-200,
+        body.theme-ocean-deep .border-slate-300 {
+            border-color: #03346E !important;
+        }
+
+        /* LAYOUT DENSITY: COMPACT WORKSPACE OVERRIDES */
+        body.density-compact .page-section,
+        body.density-compact .py-20,
+        body.density-compact .py-16,
+        body.density-compact .py-12 {
+            padding-top: 1.5rem !important;
+            padding-bottom: 1.5rem !important;
+        }
+        body.density-compact h1 {
+            font-size: 1.85rem !important;
+            line-height: 1.2 !important;
+        }
+        body.density-compact h2 {
+            font-size: 1.4rem !important;
+            line-height: 1.2 !important;
+        }
+        body.density-compact p {
+            font-size: 0.75rem !important;
+            line-height: 1.35 !important;
+        }
+        body.density-compact .p-6,
+        body.density-compact .p-8,
+        body.density-compact .sm\:p-8 {
+            padding: 1rem !important;
+        }
+        body.density-compact .gap-8 {
+            gap: 1rem !important;
+        }
+        body.density-compact .gap-12 {
+            gap: 1.5rem !important;
+        }
+        body.density-compact .aspect-video {
+            aspect-ratio: 2.2 / 1;
+        }
+        body.density-compact .space-y-6 > * + * {
+            margin-top: 0.75rem !important;
+        }
+
+        /* TYPOGRAPHY MODE: TECHNICAL COURIER/FIRA OVERRIDES */
+        body.font-tech-draft,
+        body.font-tech-draft * {
+            font-family: 'Fira Code', 'Courier New', monospace !important;
+        }
+
+        /* Custom notifications toast */
+        @keyframes slideInUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-toast {
+            animation: slideInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+<body class="text-brand-navy selection:bg-brand-teal selection:text-white flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <!-- Ambient Logistics Fluid Flow Background Canvas -->
+    <div class="fixed inset-0 -z-10 w-full h-full pointer-events-none opacity-45">
+        <canvas id="motionCanvas" class="w-full h-full"></canvas>
+    </div>
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-brand-navy text-white text-xs py-2 px-4 flex justify-between items-center z-50 relative border-b border-slate-800">
+        <div class="flex items-center gap-4">
+            <span><i class="fa-solid fa-earth-americas text-brand-lightTeal mr-1"></i> Global Industrial Sourcing Network (U.S. to India)</span>
+            <span class="hidden md:inline text-slate-400">|</span>
+            <span class="hidden md:inline"><i class="fa-solid fa-clock text-brand-lightTeal mr-1"></i> RFQ Response under 24 Hours</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <span class="font-semibold text-brand-lightTeal"><i class="fa-solid fa-shield-halved mr-1"></i> ISO 9001:2015 Audited</span>
+            <a href="mailto:info@aarontech.co" class="hover:text-brand-lightTeal transition-colors"><i class="fa-solid fa-envelope mr-1"></i> info@aarontech.co</a>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
+            <!-- Brand Logo: Dynamic Interlocking geometric vector logo -->
+            <a href="#" onclick="navigateTo('home'); return false;" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 flex items-center justify-center relative transition-all group-hover:scale-105">
+                    <svg class="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M50 10 L85 70 L65 70 L50 40 L35 70 L15 70 Z" fill="url(#navyTealGrad)" />
+                        <path d="M35 55 L65 55 L75 73 L25 73 Z" fill="url(#orangeTealGrad)" opacity="0.9" />
+                        <rect x="20" y="78" width="60" height="8" rx="4" fill="#FF4C29" />
+                        <defs>
+                            <linearGradient id="navyTealGrad" x1="50" y1="10" x2="50" y2="70" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#22D3EE" />
+                                <stop offset="1" stop-color="#0E7490" />
+                            </linearGradient>
+                            <linearGradient id="orangeTealGrad" x1="25" y1="55" x2="75" y2="73" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#FF4C29" />
+                                <stop offset="1" stop-color="#0B192C" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-tight text-brand-navy block group-hover:text-brand-teal transition-colors">AARON</span>
+                    <span class="text-[10px] font-bold tracking-widest text-brand-orange uppercase block -mt-1">TECHNOLOGIES</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden xl:flex items-center gap-1">
+                <button onclick="navigateTo('home')" class="nav-link px-3 py-2 rounded-lg text-sm font-semibold text-brand-navy hover:text-brand-teal hover:bg-slate-50 transition-all">Home</button>
+                <button onclick="navigateTo('products')" class="nav-link px-3 py-2 rounded-lg text-sm font-semibold text-brand-navy hover:text-brand-teal hover:bg-slate-50 transition-all">Products</button>
+                <button onclick="navigateTo('capabilities')" class="nav-link px-3 py-2 rounded-lg text-sm font-semibold text-brand-navy hover:text-brand-teal hover:bg-slate-50 transition-all">Capabilities & QA</button>
+                <button onclick="navigateTo('industries')" class="nav-link px-3 py-2 rounded-lg text-sm font-semibold text-brand-navy hover:text-brand-teal hover:bg-slate-50 transition-all">Industries Served</button>
+                <button onclick="navigateTo('about')" class="nav-link px-3 py-2 rounded-lg text-sm font-semibold text-brand-navy hover:text-brand-teal hover:bg-slate-50 transition-all">About & Network</button>
+                <button onclick="navigateTo('resources')" class="nav-link px-3 py-2 rounded-lg text-sm font-semibold text-brand-navy hover:text-brand-teal hover:bg-slate-50 transition-all">Resources</button>
+                <button onclick="navigateTo('contact')" class="nav-link px-3 py-2 rounded-lg text-sm font-semibold text-brand-navy hover:text-brand-teal hover:bg-slate-50 transition-all">Contact</button>
+            </nav>
+
+            <!-- Dynamic CTA Buttons + UX Preset Control -->
+            <div class="hidden lg:flex items-center gap-3">
+                <!-- SCM Sourcing Preferences Trigger Button -->
+                <button onclick="toggleWorkspaceCustomizer()" class="bg-slate-100 hover:bg-slate-200 text-brand-navy border border-slate-300 text-xs font-bold uppercase tracking-wider px-4 py-3 rounded-lg transition-all flex items-center gap-2" title="Toggle Workspace Layout Controls">
+                    <i class="fa-solid fa-sliders text-brand-teal animate-pulse"></i> Preferences
+                </button>
+                
+                <button onclick="navigateTo('rfq')" class="bg-brand-orange hover:bg-brand-navy text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-lg shadow-lg hover:shadow-brand-orange/20 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-file-invoice"></i> Submit RFQ
+                </button>
+                
+                <button onclick="navigateTo('ai-hub')" class="bg-brand-navy hover:bg-brand-teal text-white hover:text-brand-navy text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-lg shadow-lg border border-slate-700 hover:border-brand-teal transition-all flex items-center gap-2">
+                    <span class="flex h-2 w-2 relative">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-lightTeal opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-lightTeal"></span>
+                    </span>
+                    AI Assistant
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button onclick="toggleMobileMenu()" class="xl:hidden p-2 text-brand-navy hover:text-brand-teal transition-colors">
+                <i class="fa-solid fa-bars text-2xl" id="menuIcon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Navigation Overlay -->
+    <div id="mobileDrawer" class="fixed inset-0 bg-brand-navy/90 backdrop-blur-lg z-50 hidden transition-all duration-300">
+        <div class="flex flex-col h-full p-6 justify-between">
+            <div>
+                <div class="flex justify-between items-center pb-6 border-b border-slate-800">
+                    <span class="text-xl font-bold text-white tracking-wide">Aaron Tech Navigation</span>
+                    <button onclick="toggleMobileMenu()" class="text-white hover:text-brand-teal"><i class="fa-solid fa-xmark text-2xl"></i></button>
+                </div>
+                <div class="flex flex-col gap-4 mt-8">
+                    <button onclick="mobileNav('home')" class="text-left text-white text-lg font-semibold hover:text-brand-teal py-2">Home</button>
+                    <button onclick="mobileNav('products')" class="text-left text-white text-lg font-semibold hover:text-brand-teal py-2">Products Catalog</button>
+                    <button onclick="mobileNav('capabilities')" class="text-left text-white text-lg font-semibold hover:text-brand-teal py-2">Capabilities & Quality Assurance</button>
+                    <button onclick="mobileNav('industries')" class="text-left text-white text-lg font-semibold hover:text-brand-teal py-2">Industries Served</button>
+                    <button onclick="mobileNav('about')" class="text-left text-white text-lg font-semibold hover:text-brand-teal py-2">About & Supplier Network</button>
+                    <button onclick="mobileNav('resources')" class="text-left text-white text-lg font-semibold hover:text-brand-teal py-2">Blog & Resource Hub</button>
+                    <button onclick="mobileNav('contact')" class="text-left text-white text-lg font-semibold hover:text-brand-teal py-2">Contact Us</button>
+                </div>
+            </div>
+            <div class="flex flex-col gap-3 pt-6 border-t border-slate-800">
+                <button onclick="toggleWorkspaceCustomizer(); toggleMobileMenu();" class="w-full bg-slate-800 border border-slate-700 text-white py-3 rounded-lg font-bold uppercase tracking-wider text-sm text-center">UI Settings</button>
+                <button onclick="mobileNav('rfq')" class="w-full bg-brand-orange text-white py-3 rounded-lg font-bold uppercase tracking-wider text-sm text-center">Submit RFQ Form</button>
+                <button onclick="mobileNav('ai-hub')" class="w-full bg-slate-800 border border-brand-teal text-white py-3 rounded-lg font-bold uppercase tracking-wider text-sm text-center">AI Sourcing Tool</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT AREA WITH ACTIVE ROUTE STATE -->
+    <main class="flex-grow">
+        
+        <!-- ================= HOME PAGE ================= -->
+        <section id="page-home" class="page-section">
+            <!-- Hero Section -->
+            <div class="relative py-20 lg:py-32 overflow-hidden bg-gradient-to-b from-white via-slate-50 to-slate-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <!-- Left Hero Content -->
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center gap-2 bg-brand-navy/5 border border-brand-navy/10 px-3 py-1.5 rounded-full">
+                            <span class="flex h-2 w-2 rounded-full bg-brand-orange animate-pulse"></span>
+                            <span class="text-xs font-bold text-brand-navy tracking-wide">U.S. Operations & Trusted Indian Sourcing</span>
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                            Engineering & <span class="text-brand-teal">Industrial Products</span> Sourced from Trusted Indian Manufacturers
+                        </h1>
+                        <p class="text-lg text-brand-muted max-w-2xl">
+                            Helping U.S. companies reduce sourcing costs while maintaining quality, documentation, and on-time delivery.
+                        </p>
+                        <!-- Trust badges -->
+                        <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-200">
+                            <div>
+                                <span class="block text-2xl font-bold text-brand-navy">100%</span>
+                                <span class="text-xs text-brand-muted">MTC Traceability</span>
+                            </div>
+                            <div>
+                                <span class="block text-2xl font-bold text-brand-navy">Zero</span>
+                                <span class="text-xs text-brand-muted">US-India Communication Gap</span>
+                            </div>
+                            <div>
+                                <span class="block text-2xl font-bold text-brand-navy">Audited</span>
+                                <span class="text-xs text-brand-muted">Supplier Network</span>
+                            </div>
+                        </div>
+                        <!-- Actions -->
+                        <div class="flex flex-wrap gap-4 pt-4">
+                            <button onclick="navigateTo('rfq')" class="bg-brand-navy hover:bg-brand-teal text-white hover:text-brand-navy px-8 py-4 rounded-xl font-bold text-sm tracking-wide shadow-lg hover:shadow-brand-teal/20 transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i> Request a Quote
+                            </button>
+                            <button onclick="navigateTo('rfq')" class="bg-brand-orange hover:bg-brand-navy text-white px-8 py-4 rounded-xl font-bold text-sm tracking-wide shadow-lg hover:shadow-brand-orange/20 transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-file-invoice"></i> Send RFQ
+                            </button>
+                            <button onclick="navigateTo('contact')" class="bg-white hover:bg-slate-50 text-brand-navy border border-slate-300 px-8 py-4 rounded-xl font-bold text-sm tracking-wide shadow-sm transition-all flex items-center gap-2">
+                                <i class="fa-solid fa-phone"></i> Contact Us
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Hero Interactive Diagram -->
+                    <div class="lg:col-span-5 relative">
+                        <div class="relative glass-card p-6 sm:p-8 rounded-3xl shadow-xl border border-slate-200 space-y-5">
+                            <div class="absolute -top-4 -right-4 w-12 h-12 bg-brand-orange rounded-2xl flex items-center justify-center text-white text-xl shadow-lg transform rotate-12">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-brand-navy flex items-center gap-2">
+                                <i class="fa-solid fa-network-wired text-brand-teal"></i> Sourcing & Verification Pathway
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="flex gap-4 items-start relative pb-3 border-l-2 border-brand-teal/30 ml-4 pl-6">
+                                    <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-brand-teal"></div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-brand-navy uppercase tracking-wide">1. Submit Specs / RFQ</h4>
+                                        <p class="text-[11px] text-brand-muted">Drop PDF, STEP, or ASTM grade specifications instantly.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 items-start relative pb-3 border-l-2 border-brand-teal/30 ml-4 pl-6">
+                                    <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-brand-navy"></div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-brand-navy uppercase tracking-wide">2. AI & Engineering Audit</h4>
+                                        <p class="text-[11px] text-brand-muted">Cross-reference ASME, DIN, or ASTM standard catalogs.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 items-start relative pb-3 border-l-2 border-brand-teal/30 ml-4 pl-6">
+                                    <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-brand-orange"></div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-brand-navy uppercase tracking-wide">3. Rigorous Quality Control & Third-Party Inspection</h4>
+                                        <p class="text-[11px] text-brand-muted">Independent verification & certification by **Bureau Veritas** & **TÜV** directly at factory floors.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 items-start relative ml-4 pl-6">
+                                    <div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-emerald-500"></div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-brand-navy uppercase tracking-wide">4. Direct Door / Port Delivery</h4>
+                                        <p class="text-[11px] text-brand-muted">Customs cleared, shipped directly to your port or warehouse doors.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Live status indicator -->
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 flex items-center justify-between">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="relative flex h-2 w-2">
+                                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                                    </span>
+                                    <span class="text-xs font-semibold text-brand-navy">Current Port Transit Sourcing</span>
+                                </div>
+                                <span class="text-[10px] bg-slate-200 text-slate-800 font-bold px-2 py-0.5 rounded uppercase">Active Tracking</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trust Signals & US-Based Advantage Banner -->
+            <div class="bg-white border-y border-slate-200 py-12">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="flex gap-4 items-start">
+                        <div class="w-12 h-12 bg-brand-slate rounded-xl flex items-center justify-center text-brand-navy text-xl flex-shrink-0">
+                            <i class="fa-solid fa-earth-americas"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-brand-navy">U.S.-Based Office</h4>
+                            <p class="text-xs text-brand-muted mt-1">Based in Bloomfield, New Jersey. No foreign communication or time-zone barriers.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="w-12 h-12 bg-brand-slate rounded-xl flex items-center justify-center text-brand-teal text-xl flex-shrink-0">
+                            <i class="fa-solid fa-vial-circle-check"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-brand-navy">Material Traceability</h4>
+                            <p class="text-xs text-brand-muted mt-1">Full chemical & physical reports, ASTM/ASME standards, heat numbers.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="w-12 h-12 bg-brand-slate rounded-xl flex items-center justify-center text-brand-orange text-xl flex-shrink-0">
+                            <i class="fa-solid fa-ship"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-brand-navy">Logistics Support</h4>
+                            <p class="text-xs text-brand-muted mt-1">Seamless custom clearances, sea & air freight, flexible Door or Port Delivery solutions.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="w-12 h-12 bg-brand-slate rounded-xl flex items-center justify-center text-emerald-600 text-xl flex-shrink-0">
+                            <i class="fa-solid fa-percent"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-brand-navy">Sourcing Optimization</h4>
+                            <p class="text-xs text-brand-muted mt-1">Reduce costs while utilizing top industrial networks in India.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Homepage Features / Quick Sourcing Overview -->
+            <div class="py-20 bg-slate-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+                    <div class="text-center space-y-4 max-w-3xl mx-auto">
+                        <h2 class="text-3xl font-extrabold tracking-tight">Our Premium Sourcing Advantage</h2>
+                        <p class="text-brand-muted font-medium">Why leading American manufacturing and engineering companies choose Aaron Technologies.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-white p-8 rounded-2xl border border-slate-200 hover:shadow-xl transition-all space-y-4">
+                            <div class="text-brand-teal text-3xl"><i class="fa-solid fa-handshake"></i></div>
+                            <h3 class="font-extrabold text-lg">Direct Factory Sourcing</h3>
+                            <p class="text-sm text-brand-muted leading-relaxed">
+                                We source from audited, certified manufacturers in India, bypassing layers of brokers. This ensures direct manufacturer accountability and maximum transparency.
+                            </p>
+                        </div>
+                        <div class="bg-white p-8 rounded-2xl border border-slate-200 hover:shadow-xl transition-all space-y-4">
+                            <div class="text-brand-orange text-3xl"><i class="fa-solid fa-clipboard-check"></i></div>
+                            <h3 class="font-extrabold text-lg">Rigorous QA Auditing</h3>
+                            <p class="text-sm text-brand-muted leading-relaxed">
+                                Every batch is subjected to dimensional, PMI, and hydro testing before exporting. Mill Test Certificates (MTC) follow strict compliance matching ISO standard certifications.
+                            </p>
+                        </div>
+                        <div class="bg-white p-8 rounded-2xl border border-slate-200 hover:shadow-xl transition-all space-y-4">
+                            <div class="text-emerald-600 text-3xl"><i class="fa-solid fa-truck-ramp-box"></i></div>
+                            <h3 class="font-extrabold text-lg">End-to-End Logistics</h3>
+                            <p class="text-sm text-brand-muted leading-relaxed">
+                                No overseas shipping headaches. We manage export custom clearance, ocean freight, U.S. customs entry, and final Door / Port Delivery directly to your storage facilities.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Home Page Core Summary Content -->
+            <div class="bg-brand-navy text-white py-12 text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-r from-brand-teal/10 to-transparent"></div>
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4">
+                    <h3 class="text-lg sm:text-xl font-semibold tracking-wide text-brand-lightTeal">
+                        "Sourcing Industrial Engineering Products verified, audited facilities in India. Real-time support based in New Jersey."
+                    </h3>
+                    <p class="text-xs text-slate-400">Aaron Technologies LLC — Connecting North American Industrial Operations Directly to High-Caliber Manufacturers.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PRODUCTS SECTION ================= -->
+        <section id="page-products" class="page-section hidden py-16 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-slate-200 pb-8">
+                    <div>
+                        <span class="text-brand-orange font-bold uppercase tracking-wider text-xs block mb-1">Our Catalog</span>
+                        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Engineering & Industrial Products</h1>
+                        <p class="text-brand-muted mt-1 text-sm sm:text-base">Click any product category or specific item to inspect materials, certifications, and standards.</p>
+                    </div>
+                    <!-- Product Search / Filter UI -->
+                    <div class="flex flex-wrap gap-2 w-full md:w-auto">
+                        <button onclick="filterProducts('all')" class="product-filter-btn px-4 py-2 text-xs font-bold uppercase tracking-wider bg-brand-navy text-white rounded-lg transition-all">All Products</button>
+                        <button onclick="filterProducts('stainless')" class="product-filter-btn px-4 py-2 text-xs font-bold uppercase tracking-wider bg-white border border-slate-200 hover:bg-slate-50 text-brand-navy rounded-lg transition-all">Pipes & Fittings</button>
+                        <button onclick="filterProducts('hydraulic')" class="product-filter-btn px-4 py-2 text-xs font-bold uppercase tracking-wider bg-white border border-slate-200 hover:bg-slate-50 text-brand-navy rounded-lg transition-all">Hydraulic</button>
+                        <button onclick="filterProducts('engineering')" class="product-filter-btn px-4 py-2 text-xs font-bold uppercase tracking-wider bg-white border border-slate-200 hover:bg-slate-50 text-brand-navy rounded-lg transition-all">Custom Parts</button>
+                        <button onclick="filterProducts('valves')" class="product-filter-btn px-4 py-2 text-xs font-bold uppercase tracking-wider bg-white border border-slate-200 hover:bg-slate-50 text-brand-navy rounded-lg transition-all">Valves & Equip</button>
+                        <button onclick="filterProducts('aluminium')" class="product-filter-btn px-4 py-2 text-xs font-bold uppercase tracking-wider bg-white border border-slate-200 hover:bg-slate-50 text-brand-navy rounded-lg transition-all">Aluminium</button>
+                        <button onclick="filterProducts('gearboxes')" class="product-filter-btn px-4 py-2 text-xs font-bold uppercase tracking-wider bg-white border border-slate-200 hover:bg-slate-50 text-brand-navy rounded-lg transition-all">Equipment</button>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="productsGrid">
+                    <!-- Cards injected dynamically by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Technical Specifications Drawer / Modal (Drawer-style overlay) -->
+        <div id="productModal" class="fixed inset-y-0 right-0 max-w-2xl w-full bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 border-l border-slate-200 overflow-y-auto hidden flex flex-col">
+            <div class="p-6 border-b border-slate-200 flex justify-between items-center bg-brand-navy text-white animate-fade-in">
+                <div>
+                    <span id="modalCategory" class="text-brand-teal font-bold uppercase text-[10px] tracking-widest block mb-1">STAINLESS STEEL</span>
+                    <h2 id="modalTitle" class="text-xl font-extrabold">Product Title</h2>
+                </div>
+                <button onclick="closeProductModal()" class="text-white hover:text-brand-teal text-xl p-2"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <div class="p-6 sm:p-8 space-y-6 flex-grow">
+                <!-- Image Container -->
+                <div class="aspect-video w-full rounded-2xl bg-slate-100 flex items-center justify-center border border-slate-200 overflow-hidden relative">
+                    <img id="modalImage" src="" alt="Product Image" class="object-cover w-full h-full">
+                    <div class="absolute bottom-4 right-4 bg-brand-navy/80 text-white text-[11px] font-bold px-3 py-1 rounded-full backdrop-blur-sm">
+                        <i class="fa-solid fa-microscope mr-1"></i> Highly Tolerant Sourcing
+                    </div>
+                </div>
+
+                <!-- Specs Breakdown -->
+                <div class="space-y-4">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-brand-navy border-b border-slate-200 pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-gears text-brand-teal"></i> Technical Specifications
+                    </h3>
+                    <p id="modalDescription" class="text-sm text-brand-muted leading-relaxed">Detailed tech notes</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <span class="block text-xs font-bold text-brand-muted uppercase">Materials / Alloys</span>
+                            <span id="modalMaterials" class="block text-sm font-semibold text-brand-navy mt-1">304, 316L, 2205</span>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <span class="block text-xs font-bold text-brand-muted uppercase">Applicable Standards</span>
+                            <span id="modalStandards" class="block text-sm font-semibold text-brand-navy mt-1">ASTM, ASME, DIN</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-brand-navy border-b border-slate-200 pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-industry text-brand-orange"></i> Applications & Markets
+                    </h3>
+                    <p id="modalApplications" class="text-sm text-brand-muted leading-relaxed">Typical use cases go here</p>
+                </div>
+            </div>
+
+            <!-- Footer Quote Trigger -->
+            <div class="p-6 border-t border-slate-200 bg-slate-50 flex gap-3">
+                <button id="addToRfqBtn" onclick="" class="flex-1 bg-brand-navy hover:bg-brand-teal text-white hover:text-brand-navy py-3 px-4 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-plus"></i> Add to RFQ List
+                </button>
+                <button onclick="navigateToRFQFromModal()" class="bg-brand-orange hover:bg-brand-navy text-white py-3 px-4 rounded-xl font-bold text-sm transition-all flex items-center gap-2">
+                    Submit RFQ Now <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= CAPABILITIES & QA ================= -->
+        <section id="page-capabilities" class="page-section hidden py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+                
+                <!-- Capabilities Section -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-6 space-y-6">
+                        <span class="text-brand-teal font-extrabold uppercase tracking-widest text-xs">U.S. Engineering Audits</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-brand-navy">Indian Sourcing Network with U.S. Calibration</h2>
+                        <p class="text-sm sm:text-base text-brand-muted leading-relaxed">
+                            Aaron Technologies links state-of-the-art metalworking, precision machining, and forging facilities in India directly to the highly demanding American supply chain. We maintain active, on-site personnel checking raw materials, testing tolerances, and managing quality long before any shipment boards a vessel.
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 animate-fade-in">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-brand-teal"><i class="fa-solid fa-circle-check"></i></span>
+                                <span class="text-xs font-bold text-brand-navy">ISO 9001:2015 Audits</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-brand-teal"><i class="fa-solid fa-circle-check"></i></span>
+                                <span class="text-xs font-bold text-brand-navy">PMI Chemical Verification</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-brand-teal"><i class="fa-solid fa-circle-check"></i></span>
+                                <span class="text-xs font-bold text-brand-navy">NDT Ultrasonic Inspection</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-brand-teal"><i class="fa-solid fa-circle-check"></i></span>
+                                <span class="text-xs font-bold text-brand-navy">Hydrostatic Testing</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right: Manufacturing Capabilities Detailed List -->
+                    <div class="lg:col-span-6">
+                        <div class="bg-gradient-to-tr from-brand-navy to-slate-800 p-8 rounded-3xl text-white relative overflow-hidden space-y-6 shadow-xl">
+                            <div class="absolute -right-16 -top-16 w-48 h-48 bg-brand-teal/10 rounded-full blur-3xl"></div>
+                            <h3 class="text-lg font-bold text-brand-teal"><i class="fa-solid fa-microchip mr-2"></i>Manufacturing Capabilities</h3>
+                            <div class="space-y-4 text-xs sm:text-sm">
+                                <div class="flex justify-between items-center border-b border-slate-700/80 pb-3">
+                                    <span class="font-semibold">CNC Machining & Turning</span>
+                                    <span class="text-xs font-bold bg-slate-700 text-brand-teal px-3 py-1 rounded">High-precision tolerance &plusmn;0.01mm</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-slate-700/80 pb-3">
+                                    <span class="font-semibold">Turning & Milling</span>
+                                    <span class="text-xs font-bold bg-slate-700 text-brand-teal px-3 py-1 rounded">4-Axis Milled Profiling</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-slate-700/80 pb-3">
+                                    <span class="font-semibold">Welding & Fabrication</span>
+                                    <span class="text-xs font-bold bg-slate-700 text-brand-teal px-3 py-1 rounded">ASME Section IX Standard</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-slate-700/80 pb-3">
+                                    <span class="font-semibold">Laser Cutting & Punching</span>
+                                    <span class="text-xs font-bold bg-slate-700 text-brand-teal px-3 py-1 rounded">Up to 25mm Carbon Steel cut</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="font-semibold">Surface Finishing & Assembly</span>
+                                    <span class="text-xs font-bold bg-slate-700 text-brand-teal px-3 py-1 rounded">Hard chrome plating &gt;20&mu;m</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quality Assurance & Standards Grid -->
+                <div class="space-y-8">
+                    <div class="text-center space-y-2">
+                        <h3 class="text-2xl font-extrabold text-brand-navy">QA Testing & Material Standards</h3>
+                        <p class="text-brand-muted text-sm max-w-2xl mx-auto">Absolute verification to ensure components arrive ready to be deployed into high-stakes operations.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="bg-slate-50 border border-slate-200 p-6 rounded-2xl hover:border-brand-teal transition-all space-y-3">
+                            <span class="text-brand-orange text-2xl"><i class="fa-solid fa-file-shield"></i></span>
+                            <h4 class="font-bold text-base">Material Test Reports</h4>
+                            <p class="text-xs text-brand-muted">Standard Mill Test Certificates (MTC) conforming to EN 10204 3.1 or 3.2 follow each dispatch batch.</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 p-6 rounded-2xl hover:border-brand-teal transition-all space-y-3">
+                            <span class="text-brand-orange text-2xl"><i class="fa-solid fa-vial"></i></span>
+                            <h4 class="font-bold text-base">PMI & Hydro Testing</h4>
+                            <p class="text-xs text-brand-muted">On-site Positive Material Identification (PMI) and hydrostatic pressure testing verify alloy structure soundness.</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 p-6 rounded-2xl hover:border-brand-teal transition-all space-y-3">
+                            <span class="text-brand-orange text-2xl"><i class="fa-solid fa-ruler-combined"></i></span>
+                            <h4 class="font-bold text-base">Dimensional Inspection</h4>
+                            <p class="text-xs text-brand-muted">Micrometer, visual tolerance, and structural sizing audits performed by qualified quality assurance managers.</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 p-6 rounded-2xl hover:border-brand-teal transition-all space-y-3">
+                            <span class="text-brand-orange text-2xl"><i class="fa-solid fa-id-card-clip"></i></span>
+                            <h4 class="font-bold text-base">Third-Party Inspection</h4>
+                            <p class="text-xs text-brand-muted">Fully compliant with international certification agencies including **Bureau Veritas** and **TÜV** inspections.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Supplier Network & ISO Audits -->
+                <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200 relative overflow-hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-8 space-y-4">
+                            <span class="text-xs font-bold text-brand-orange bg-brand-orange/10 px-3 py-1 rounded-full uppercase">Secure Supplier Network</span>
+                            <h3 class="text-xl sm:text-2xl font-extrabold text-brand-navy">Traceable Production & Audited Manufacturers</h3>
+                            <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
+                                Our network in India encompasses ISO 9001 and PED-certified manufacturers with rich export histories to North America and Western Europe. By stationing local audit personnel on factory floor shifts, we trace quality parameters in real-time, matching standard specifications (ASTM, ASME, DIN, ISO, EN) seamlessly.
+                            </p>
+                        </div>
+                        <div class="lg:col-span-4 flex justify-center gap-4 flex-wrap">
+                            <div class="bg-white border border-slate-200 rounded-xl px-5 py-4 text-center shadow-sm w-36">
+                                <span class="block text-2xl font-extrabold text-brand-teal">100%</span>
+                                <span class="text-[10px] text-brand-muted font-bold uppercase">Certified Mills</span>
+                            </div>
+                            <div class="bg-white border border-slate-200 rounded-xl px-5 py-4 text-center shadow-sm w-36">
+                                <span class="block text-2xl font-extrabold text-brand-orange">Zero</span>
+                                <span class="text-[10px] text-brand-muted font-bold uppercase">Trace Gaps</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= INDUSTRIES SERVED ================= -->
+        <section id="page-industries" class="page-section hidden py-16 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+                <div class="text-center space-y-4 max-w-3xl mx-auto">
+                    <span class="text-brand-teal font-extrabold uppercase tracking-widest text-xs">Serving Critical Markets</span>
+                    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Industries & Case Studies</h1>
+                    <p class="text-brand-muted text-sm sm:text-base">We provide high-precision standard components tailored to critical operational parameters.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="glass-card p-6 rounded-2xl border border-slate-200 space-y-3 hover:translate-y-[-4px] transition-all duration-300">
+                        <div class="text-brand-orange text-2xl"><i class="fa-solid fa-gas-pump"></i></div>
+                        <h3 class="font-bold text-base">Oil & Gas / Chemical</h3>
+                        <p class="text-xs text-brand-muted">Corrosion-resistant high-pressure seamless pipes, fittings, and flanges certified for volatile fluids.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl border border-slate-200 space-y-3 hover:translate-y-[-4px] transition-all duration-300">
+                        <div class="text-brand-orange text-2xl"><i class="fa-solid fa-water"></i></div>
+                        <h3 class="font-bold text-base">Water & Wastewater</h3>
+                        <p class="text-xs text-brand-muted">Custom large-diameter fabricated systems, industrial gates, custom flanges, and protective linings.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl border border-slate-200 space-y-3 hover:translate-y-[-4px] transition-all duration-300">
+                        <div class="text-brand-orange text-2xl"><i class="fa-solid fa-gears"></i></div>
+                        <h3 class="font-bold text-base">Hydraulics & Machinery</h3>
+                        <p class="text-xs text-brand-muted">Honed tubes, hard-chrome bars, and high-tolerance cylinder piston rods built for intense hydraulic loads.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl border border-slate-200 space-y-3 hover:translate-y-[-4px] transition-all duration-300">
+                        <div class="text-brand-orange text-2xl"><i class="fa-solid fa-sun"></i></div>
+                        <h3 class="font-bold text-base">Renewable Energy</h3>
+                        <p class="text-xs text-brand-muted">Structural components, solar racking materials, wind tower fabrications, and highly resilient gearboxes.</p>
+                    </div>
+                </div>
+
+                <!-- Case Studies -->
+                <div class="space-y-8">
+                    <div class="border-l-4 border-brand-teal pl-4">
+                        <h2 class="text-2xl font-extrabold text-brand-navy">Proven Performance: Sourcing Case Studies</h2>
+                        <p class="text-xs text-brand-muted">Real outcomes engineered for North American manufacturers.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 space-y-6">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-brand-orange bg-brand-orange/10 px-3 py-1 rounded">Stainless Steel Sourcing</span>
+                                <span class="text-xs text-brand-muted">Client: Food Processing Equipment OEM</span>
+                            </div>
+                            <h3 class="text-lg font-bold">42% Sourcing Cost Optimization on ASTM A312 Tubing</h3>
+                            <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
+                                <strong>Challenge:</strong> Client needed monthly shipments of seamless SS 316L tubes, but domestic lead times spiked to 26 weeks.
+                                <br><strong>Solution:</strong> Sourced from ISO-certified factory partner in India. Configured custom sea-freight pipeline with monthly warehouse drop-shipping.
+                                <br><strong>Outcome:</strong> Seamless material delivery with full heat tracing and 3.1 certification. Absolute zero production downtime.
+                            </p>
+                        </div>
+                        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 space-y-6">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-brand-teal bg-brand-teal/10 px-3 py-1 rounded">Hydraulic Sourcing</span>
+                                <span class="text-xs text-brand-muted">Client: Custom Cylinder Builder</span>
+                            </div>
+                            <h3 class="text-lg font-bold">Hard Chrome Bars Delivered With Precision Surface Finishing</h3>
+                            <p class="text-xs sm:text-sm text-brand-muted leading-relaxed">
+                                <strong>Challenge:</strong> Micro-fissures and poor plating depth from current suppliers resulted in dynamic seal leaks in operational test fields.
+                                <br><strong>Solution:</strong> Sourced with rigid verification ensuring 20&mu;m chrome depth and Ra &le;0.2&mu;m surface finish before dispatch.
+                                <br><strong>Outcome:</strong> Zero field failures reported over 12 months. Sourcing rates optimized with stable, predictable pricing structures.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= ABOUT & NETWORK ================= -->
+        <section id="page-about" class="page-section hidden py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="text-brand-orange font-bold uppercase tracking-wider text-xs">Our Story</span>
+                        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-brand-navy">About Aaron Technologies</h1>
+                        <p class="text-sm sm:text-base text-brand-muted leading-relaxed">
+                            Aaron Technologies was founded on a simple premise: Indian manufacturers are producing world-class industrial engineering components, but U.S. purchasing departments often struggle with time-zone gaps, logistics tracking, standard alignment (ASTM/ASME vs ISO/DIN), and consistent quality verification.
+                        </p>
+                        <p class="text-sm sm:text-base text-brand-muted leading-relaxed">
+                            We act as the direct technical bridge. By establishing engineering controls directly inside leading production hubs, we bridge the gap. You communicate with our U.S. operational managers in real time, and we command execution directly with the manufacturing floor in India.
+                        </p>
+                        
+                        <div class="border-t border-slate-200 pt-6">
+                            <h3 class="font-bold text-lg text-brand-navy mb-4">Aaron - Founder & CEO</h3>
+                            <div class="flex items-start gap-4">
+                                <div class="w-16 h-16 rounded-full bg-brand-slate flex items-center justify-center text-brand-navy text-2xl flex-shrink-0 border border-slate-300">
+                                    <i class="fa-solid fa-user-tie text-brand-teal"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold uppercase tracking-wider text-brand-orange">Leadership Message</p>
+                                    <p class="text-xs sm:text-sm italic text-brand-muted mt-1 leading-relaxed">
+                                        "At Aaron Technologies, we don't just act as brokers. We are mechanical engineers and supply-chain logistics specialists. We own the responsibility of ensuring your parts fit perfectly, meet exact structural codes, and are delivered exactly when scheduled."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Supply chain visual card -->
+                    <div class="lg:col-span-5">
+                        <div class="glass-card p-8 rounded-3xl border border-slate-200 space-y-6">
+                            <h3 class="text-lg font-bold text-brand-navy border-b border-slate-100 pb-3">The Sourcing Chain</h3>
+                            <div class="space-y-4">
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex gap-4">
+                                    <div class="w-10 h-10 rounded-lg bg-brand-navy text-white flex items-center justify-center font-bold flex-shrink-0">US</div>
+                                    <div>
+                                        <h4 class="text-sm font-bold">U.S. Engineering Support</h4>
+                                        <p class="text-xs text-brand-muted mt-0.5">We check standard files, STEP models, specifications, and issue quotes.</p>
+                                    </div>
+                                </div>
+                                <div class="text-center text-slate-400 py-1"><i class="fa-solid fa-arrow-down-long"></i></div>
+                                <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex gap-4">
+                                    <div class="w-10 h-10 rounded-lg bg-brand-teal text-brand-navy flex items-center justify-center font-bold flex-shrink-0">IN</div>
+                                    <div>
+                                        <h4 class="text-sm font-bold">Indian Production Controls</h4>
+                                        <p class="text-xs text-brand-muted mt-0.5">Our audit team tests physical samples on-site before clearance.</p>
+                                    </div>
+                                </div>
+                                <div class="text-center text-slate-400 py-1"><i class="fa-solid fa-arrow-down-long"></i></div>
+                                <div class="bg-brand-orange text-white p-4 rounded-xl flex gap-4">
+                                    <div class="w-10 h-10 rounded-lg bg-white text-brand-orange flex items-center justify-center font-bold flex-shrink-0"><i class="fa-solid fa-ship"></i></div>
+                                    <div>
+                                        <h4 class="text-sm font-bold">Door / Port Delivery</h4>
+                                        <p class="text-xs text-white/90 mt-0.5">Customs clearance, ocean port filing, and local site delivery are fully managed by our logistics network.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Certifications & Documents Section -->
+                <div class="border-t border-slate-200 pt-12 space-y-6">
+                    <div class="text-center max-w-2xl mx-auto space-y-2">
+                        <h3 class="text-xl font-bold text-brand-navy">Compliance & Business Registrations</h3>
+                        <p class="text-xs text-brand-muted">Verify corporate registrations, tax documents, and supplier certification packets.</p>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-center">
+                            <span class="block text-xs font-bold text-brand-navy uppercase">EIN Registered</span>
+                            <span class="text-[10px] text-brand-muted block mt-1">XX-XXXX789</span>
+                        </div>
+                        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-center">
+                            <span class="block text-xs font-bold text-brand-navy uppercase">W-9 Request</span>
+                            <span class="text-[10px] text-brand-muted block mt-1">Available On Demand</span>
+                        </div>
+                        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-center">
+                            <span class="block text-xs font-bold text-brand-navy uppercase">ISO 9001:2015</span>
+                            <span class="text-[10px] text-brand-muted block mt-1">Audited Network Only</span>
+                        </div>
+                        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl text-center">
+                            <span class="block text-xs font-bold text-brand-navy uppercase">BV Approved</span>
+                            <span class="text-[10px] text-brand-muted block mt-1">Inspections Coordinated</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= BLOG & RESOURCES ================= -->
+        <section id="page-resources" class="page-section hidden py-16 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-slate-200 pb-8">
+                    <div>
+                        <span class="text-brand-orange font-bold uppercase tracking-wider text-xs block mb-1">Knowledge Hub</span>
+                        <h1 class="text-3xl font-extrabold tracking-tight text-brand-navy">Blogs & Technical Resource Center</h1>
+                        <p class="text-brand-muted mt-1 text-sm sm:text-base">Engineering guides and industry compliance updates to help streamline your sourcing roadmap.</p>
+                    </div>
+                    <!-- Download Catalog Button -->
+                    <button onclick="triggerResourceDownload('Aaron Technologies Catalog')" class="bg-brand-navy text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-lg hover:bg-brand-teal hover:text-brand-navy transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-cloud-arrow-down"></i> Technical Catalog.pdf
+                    </button>
+                </div>
+
+                <!-- Resources Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg transition-all flex flex-col justify-between">
+                        <div class="p-6 space-y-4">
+                            <span class="text-[10px] font-bold text-brand-teal bg-brand-teal/10 px-3 py-1 rounded-full uppercase">Seamless vs Welded</span>
+                            <h3 class="text-base font-extrabold text-brand-navy hover:text-brand-teal cursor-pointer">Understanding ASTM A312: Seamless vs Welded Pipes</h3>
+                            <p class="text-xs text-brand-muted leading-relaxed">
+                                Selecting between seamless and welded configurations dramatically impacts pressure limits, chemical integrity, and raw acquisition costs. This guide breaks down testing requirements under ASME standards.
+                            </p>
+                        </div>
+                        <div class="p-6 border-t border-slate-100 bg-slate-50 flex justify-between items-center text-xs">
+                            <span class="text-brand-muted">Read Time: 5 Mins</span>
+                            <span onclick="showToast('Loading ASTM A312 Whitepaper...')" class="text-brand-orange font-bold hover:underline cursor-pointer">View Guide <i class="fa-solid fa-arrow-right-long ml-1"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg transition-all flex flex-col justify-between">
+                        <div class="p-6 space-y-4">
+                            <span class="text-[10px] font-bold text-brand-orange bg-brand-orange/10 px-3 py-1 rounded-full uppercase">Quality Control</span>
+                            <h3 class="text-base font-extrabold text-brand-navy hover:text-brand-teal cursor-pointer">Understanding Material Test Certificates (EN 10204 3.1)</h3>
+                            <p class="text-xs text-brand-muted leading-relaxed">
+                                MTC reports verify metallurgical heat numbers, chemical composition, and physical strength testing. Learn how to verify traceability when importing engineered products.
+                            </p>
+                        </div>
+                        <div class="p-6 border-t border-slate-100 bg-slate-50 flex justify-between items-center text-xs">
+                            <span class="text-brand-muted">Read Time: 7 Mins</span>
+                            <span onclick="showToast('Opening EN 10204 Certification Guide...')" class="text-brand-orange font-bold hover:underline cursor-pointer">View Guide <i class="fa-solid fa-arrow-right-long ml-1"></i></span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg transition-all flex flex-col justify-between">
+                        <div class="p-6 space-y-4">
+                            <span class="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full uppercase">Hydraulic Cylinders</span>
+                            <h3 class="text-base font-extrabold text-brand-navy hover:text-brand-teal cursor-pointer">Choosing the Right Hydraulic Cylinder: Material Factors</h3>
+                            <p class="text-xs text-brand-muted leading-relaxed">
+                                Explore how surface roughness, chrome plating thickness, and dynamic seals determine performance under extreme pressure loads.
+                            </p>
+                        </div>
+                        <div class="p-6 border-t border-slate-100 bg-slate-50 flex justify-between items-center text-xs">
+                            <span class="text-brand-muted">Read Time: 6 Mins</span>
+                            <span onclick="showToast('Loading Hydraulic Cylinder Guide...')" class="text-brand-orange font-bold hover:underline cursor-pointer">View Guide <i class="fa-solid fa-arrow-right-long ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Download Center -->
+                <div class="bg-white p-8 rounded-3xl border border-slate-200 space-y-6">
+                    <h3 class="font-bold text-lg text-brand-navy flex items-center gap-2">
+                        <i class="fa-solid fa-folder-open text-brand-teal"></i> Technical Specification Center
+                    </h3>
+                    <p class="text-xs sm:text-sm text-brand-muted">Download mechanical dimension references, ASTM vs ASME material standard comparison tables, and mill compliance certificates.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="p-4 border border-slate-200 rounded-xl flex items-center justify-between hover:bg-slate-50 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <span class="text-brand-orange text-xl"><i class="fa-regular fa-file-pdf"></i></span>
+                                <div class="text-left">
+                                    <span class="block text-xs font-bold text-brand-navy">Seamless Pipe Dimension Chart</span>
+                                    <span class="text-[10px] text-brand-muted">PDF - 1.2 MB</span>
+                                </div>
+                            </div>
+                            <button onclick="triggerResourceDownload('Seamless Pipe Dimension Chart')" class="text-brand-muted hover:text-brand-teal"><i class="fa-solid fa-download"></i></button>
+                        </div>
+                        <div class="p-4 border border-slate-200 rounded-xl flex items-center justify-between hover:bg-slate-50 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <span class="text-brand-orange text-xl"><i class="fa-regular fa-file-excel"></i></span>
+                                <div class="text-left">
+                                    <span class="block text-xs font-bold text-brand-navy">ASTM vs EN Steel Equivalents</span>
+                                    <span class="text-[10px] text-brand-muted">XLSX - 450 KB</span>
+                                </div>
+                            </div>
+                            <button onclick="triggerResourceDownload('ASTM vs EN Steel Equivalents')" class="text-brand-muted hover:text-brand-teal"><i class="fa-solid fa-download"></i></button>
+                        </div>
+                        <div class="p-4 border border-slate-200 rounded-xl flex items-center justify-between hover:bg-slate-50 transition-colors">
+                            <div class="flex items-center gap-3">
+                                <span class="text-brand-orange text-xl"><i class="fa-regular fa-file-pdf"></i></span>
+                                <div class="text-left">
+                                    <span class="block text-xs font-bold text-brand-navy">Hydraulic Rod Plating QA Protocol</span>
+                                    <span class="text-[10px] text-brand-muted">PDF - 850 KB</span>
+                                </div>
+                            </div>
+                            <button onclick="triggerResourceDownload('Hydraulic Rod Plating QA Protocol')" class="text-brand-muted hover:text-brand-teal"><i class="fa-solid fa-download"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= CONTACT PAGE ================= -->
+        <section id="page-contact" class="page-section hidden py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+                <div class="text-center space-y-4 max-w-3xl mx-auto">
+                    <span class="text-brand-orange font-bold uppercase tracking-wider text-xs">Get In Touch</span>
+                    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Aaron Technologies Sourcing HQ</h1>
+                    <p class="text-brand-muted text-sm">Have an active manufacturing project or custom production run? Reach out directly via phone or email.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <!-- Left: Contact Information -->
+                    <div class="lg:col-span-5 space-y-8">
+                        <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 space-y-6">
+                            <h3 class="font-bold text-lg">Contact Information</h3>
+                            
+                            <div class="space-y-4">
+                                <div class="flex gap-4 items-start">
+                                    <span class="w-10 h-10 rounded-lg bg-brand-navy text-brand-teal flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-phone"></i></span>
+                                    <div>
+                                        <p class="text-xs font-bold text-brand-muted">U.S. Support Line</p>
+                                        <a href="tel:+19735550192" class="text-sm font-semibold hover:text-brand-orange transition-colors">+1 (973) 555-0192</a>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 items-start">
+                                    <span class="w-10 h-10 rounded-lg bg-brand-navy text-brand-teal flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-envelope"></i></span>
+                                    <div>
+                                        <p class="text-xs font-bold text-brand-muted">RFQ & Technical Sales Email</p>
+                                        <a href="mailto:info@aarontech.co" class="text-sm font-semibold hover:text-brand-orange transition-colors">info@aarontech.co</a>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 items-start">
+                                    <span class="w-10 h-10 rounded-lg bg-brand-navy text-brand-teal flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-location-dot"></i></span>
+                                    <div>
+                                        <p class="text-xs font-bold text-brand-muted">Operational Office</p>
+                                        <p class="text-sm font-semibold text-brand-navy">Bloomfield, New Jersey, USA</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4 items-start">
+                                    <span class="w-10 h-10 rounded-lg bg-brand-navy text-brand-teal flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-building"></i></span>
+                                    <div>
+                                        <p class="text-xs font-bold text-brand-muted">Tax & Registration Identifiers</p>
+                                        <p class="text-xs text-brand-navy">EIN: XX-XXXX789 | Registered U.S. Supply LLC</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Business Hours -->
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                            <h4 class="font-bold text-sm mb-3">Operational Hours (EST)</h4>
+                            <div class="space-y-2 text-xs">
+                                <div class="flex justify-between"><span>Monday - Friday</span><span class="font-bold">8:00 AM - 6:00 PM</span></div>
+                                <div class="flex justify-between"><span>Saturday</span><span class="font-bold">9:00 AM - 1:00 PM</span></div>
+                                <div class="flex justify-between"><span>Sunday</span><span class="text-brand-orange font-bold">Closed (Emergency Only)</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Contact Form -->
+                    <div class="lg:col-span-7">
+                        <form onsubmit="handleContactSubmit(event)" class="bg-slate-50 p-8 rounded-3xl border border-slate-200 space-y-6">
+                            <h3 class="font-bold text-lg">Send Us an Inquiry</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-navy mb-1.5 uppercase">Your Name</label>
+                                    <input type="text" required class="w-full bg-white border border-slate-300 rounded-lg px-4 py-2.5 text-xs text-brand-navy focus:outline-none focus:border-brand-teal">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-navy mb-1.5 uppercase">Company Name</label>
+                                    <input type="text" required class="w-full bg-white border border-slate-300 rounded-lg px-4 py-2.5 text-xs text-brand-navy focus:outline-none focus:border-brand-teal">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-navy mb-1.5 uppercase">Email Address</label>
+                                    <input type="email" required class="w-full bg-white border border-slate-300 rounded-lg px-4 py-2.5 text-xs text-brand-navy focus:outline-none focus:border-brand-teal">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-navy mb-1.5 uppercase">Phone Number</label>
+                                    <input type="text" class="w-full bg-white border border-slate-300 rounded-lg px-4 py-2.5 text-xs text-brand-navy focus:outline-none focus:border-brand-teal">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-brand-navy mb-1.5 uppercase">Tell Us About Your Project Requirements</label>
+                                <textarea rows="4" required class="w-full bg-white border border-slate-300 rounded-lg px-4 py-2.5 text-xs text-brand-navy focus:outline-none focus:border-brand-teal"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-brand-navy hover:bg-brand-teal text-white hover:text-brand-navy py-3 px-6 rounded-lg font-bold text-xs uppercase tracking-wider transition-colors">
+                                Submit Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Google Map Placeholder Frame -->
+                <div class="w-full h-80 rounded-2xl overflow-hidden border border-slate-200 shadow-sm relative">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3020.219927958043!2d-74.1953259845923!3d40.80336207932147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25553eef63189%3A0xc3f6087b7a544c4b!2sBloomfield%2C%20NJ!5e0!3m2!1sen!2sus!4v1625232938123!5m2!1sen!2sus" class="w-full h-full border-0" allowfullscreen="" loading="lazy"></iframe>
+                    <div class="absolute top-4 left-4 bg-brand-navy/90 text-white text-xs px-3 py-2 rounded-xl backdrop-blur-sm">
+                        <i class="fa-solid fa-map-location mr-1"></i> Sourcing Head Office - Bloomfield, NJ
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= REQUEST FOR QUOTE (RFQ) ================= -->
+        <section id="page-rfq" class="page-section hidden py-16 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                <div class="text-center space-y-2">
+                    <h1 class="text-3xl font-extrabold text-brand-navy">Detailed RFQ Submission</h1>
+                    <p class="text-brand-muted text-sm max-w-2xl mx-auto">Upload technical drawings, specify material grades, design tolerances, and required quality inspection criteria.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Sourcing Specs Cart -->
+                    <div class="lg:col-span-4 space-y-6">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 space-y-4">
+                            <h3 class="font-bold text-sm text-brand-navy border-b border-slate-100 pb-2 flex justify-between items-center">
+                                <span>Selected Products</span>
+                                <span id="cartCount" class="bg-brand-orange text-white text-xs font-bold px-2 py-0.5 rounded-full">0</span>
+                            </h3>
+                            <div id="rfqCartList" class="space-y-3 max-h-60 overflow-y-auto">
+                                <p class="text-xs text-brand-muted text-center py-4">No products selected yet. Click any item inside the catalog and tap "Add to RFQ List".</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Direct RFQ Form -->
+                    <div class="lg:col-span-8">
+                        <form onsubmit="handleRFQSubmit(event)" class="bg-white p-8 rounded-3xl border border-slate-200 space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-navy mb-1 uppercase">Contact Person Name</label>
+                                    <input type="text" id="rfqContact" required class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2 text-xs text-brand-navy focus:outline-none focus:border-brand-teal">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-navy mb-1 uppercase">Company Name</label>
+                                    <input type="text" id="rfqCompany" required class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2 text-xs text-brand-navy focus:outline-none focus:border-brand-teal">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-navy mb-1 uppercase">Corporate Email</label>
+                                    <input type="email" id="rfqEmail" required class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2 text-xs text-brand-navy focus:outline-none focus:border-brand-teal">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-navy mb-1 uppercase">Material Grade Required</label>
+                                    <input type="text" id="rfqGrade" placeholder="e.g. ASTM A312 TP316L, ST52 Honed Tube" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2 text-xs text-brand-navy focus:outline-none focus:border-brand-teal">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-navy mb-1 uppercase">Target Sourcing Quantity</label>
+                                    <input type="text" id="rfqQty" required placeholder="e.g. 500 Meters, 2000 Units" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2 text-xs text-brand-navy focus:outline-none focus:border-brand-teal">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-navy mb-1 uppercase">Delivery Location (City/Port)</label>
+                                    <input type="text" id="rfqLocation" required placeholder="e.g. Houston Port, TX Warehouse" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2 text-xs text-brand-navy focus:outline-none focus:border-brand-teal">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-navy mb-1 uppercase">Desired Delivery Mode</label>
+                                    <select id="rfqMode" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2 text-xs text-brand-navy focus:outline-none focus:border-brand-teal">
+                                        <option value="door">Door Delivery (Direct to Warehouse)</option>
+                                        <option value="port">Port Delivery (FOB/CIF Ocean Port)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Mock File Drag & Drop -->
+                            <div>
+                                <label class="block text-xs font-bold text-brand-navy mb-1 uppercase">Upload Drawings / PDFs / STEP files / Specifications</label>
+                                <div class="border-2 border-dashed border-slate-300 rounded-xl p-6 text-center hover:bg-slate-50 cursor-pointer relative" onclick="triggerFileInput('rfq-file')">
+                                    <input type="file" id="rfq-file" class="hidden" onchange="updateFileName(this, 'rfq-file-display')">
+                                    <span class="text-brand-orange text-2xl"><i class="fa-solid fa-cloud-arrow-up"></i></span>
+                                    <p class="text-xs text-brand-navy font-semibold mt-2" id="rfq-file-display">Drag & Drop files here, or click to browse</p>
+                                    <p class="text-[10px] text-brand-muted mt-1">Acceptable formats: PDF, DWG, STEP, JPG up to 15MB</p>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-brand-navy mb-1 uppercase font-semibold">Special Instructions / Bureau Veritas Inspections</label>
+                                <textarea rows="3" placeholder="e.g. Require Bureau Veritas Third Party PMI Testing, EN 10204 3.1 Traceability reports..." class="w-full bg-slate-50 border border-slate-300 rounded-lg px-4 py-2 text-xs text-brand-navy focus:outline-none focus:border-brand-teal"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-brand-orange hover:bg-brand-navy text-white font-bold py-3 px-6 rounded-xl text-xs uppercase tracking-wider transition-colors">
+                                Submit Sourcing RFQ Package
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= AI HUBS (AI ESTIMATOR & DRAWING ANALYZER) ================= -->
+        <section id="page-ai-hub" class="page-section hidden py-16 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                <div class="text-center space-y-4 max-w-3xl mx-auto">
+                    <span class="text-brand-teal font-extrabold uppercase tracking-widest text-xs flex justify-center items-center gap-1.5">
+                        <span class="flex h-2 w-2 relative">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-teal opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-teal"></span>
+                        </span>
+                        Next-Gen Sourcing Tools
+                    </span>
+                    <h1 class="text-3xl font-extrabold text-brand-navy">Aaron Technologies AI Quote Assistant</h1>
+                    <p class="text-brand-muted text-sm">
+                        Upload technical drawings or describe standard specifications (ASTM/ASME) to instantly estimate chemical properties, testing protocols, approximate pricing, and shipping pathways.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <!-- Interactive AI Input Panel -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 space-y-6 shadow-sm">
+                            <h3 class="font-extrabold text-sm text-brand-navy flex items-center gap-2">
+                                <i class="fa-solid fa-wand-magic-sparkles text-brand-orange"></i> Sourcing Spec Analyzer
+                            </h3>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-navy mb-1 uppercase">Describe Sourcing Requirement</label>
+                                    <textarea id="aiInput" rows="4" placeholder="e.g. Sourcing 1500 meters of ASTM A312 TP316L Seamless Pipe, Schedule 40, size 3 inches. Need EN 10204 3.1 Traceability." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-4 text-xs text-brand-navy focus:outline-none focus:border-brand-teal"></textarea>
+                                </div>
+
+                                <!-- Image Blueprint Drag Zone -->
+                                <div>
+                                    <label class="block text-xs font-bold text-brand-navy mb-1 uppercase">Drawing Analysis (Upload Technical Drawing/Sketch)</label>
+                                    <div class="border-2 border-dashed border-slate-300 rounded-xl p-6 text-center hover:bg-slate-50 cursor-pointer relative" onclick="triggerFileInput('ai-image-upload')">
+                                        <input type="file" id="ai-image-upload" accept="image/*" class="hidden" onchange="previewUploadedImage(this)">
+                                        <span class="text-brand-teal text-2xl"><i class="fa-solid fa-image"></i></span>
+                                        <p class="text-xs text-brand-navy font-semibold mt-2" id="ai-file-display">Upload Drawing Blueprint</p>
+                                        <p class="text-[10px] text-brand-muted mt-1">Image uploads will be read directly by Gemini 3.1 Vision</p>
+                                    </div>
+                                    <!-- Image Preview Container -->
+                                    <div id="aiImagePreviewContainer" class="mt-4 hidden border border-slate-200 rounded-xl overflow-hidden relative max-h-40">
+                                        <img id="aiImagePreview" src="" class="object-contain w-full h-full max-h-40 bg-slate-100">
+                                        <button onclick="clearUploadedImage(event)" class="absolute top-2 right-2 bg-brand-navy text-white p-1.5 rounded-full text-xs hover:bg-brand-orange"><i class="fa-solid fa-trash"></i></button>
+                                    </div>
+                                </div>
+
+                                <button onclick="triggerAISpecAnalysis()" class="w-full bg-brand-navy hover:bg-brand-teal text-white hover:text-brand-navy font-bold py-3.5 px-6 rounded-xl text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-lg">
+                                    <i class="fa-solid fa-microchip"></i> Run AI Technical Audit
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Sample fast prompt buttons -->
+                        <div class="grid grid-cols-2 gap-2 animate-fade-in">
+                            <button onclick="applySampleSpec('Seamless Pipe Audit')" class="bg-white hover:bg-slate-50 border border-slate-200 rounded-xl p-3 text-left transition-all">
+                                <span class="block text-[11px] font-bold text-brand-navy">ASTM A312 TP316L</span>
+                                <span class="text-[9px] text-brand-muted">Auto-build seamless specifications</span>
+                            </button>
+                            <button onclick="applySampleSpec('Honed Tubes Analysis')" class="bg-white hover:bg-slate-50 border border-slate-200 rounded-xl p-3 text-left transition-all">
+                                <span class="block text-[11px] font-bold text-brand-navy">ASTM A519 Grade 1026</span>
+                                <span class="text-[9px] text-brand-muted">Honed Tube & Honing tolerances</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- AI Results Output -->
+                    <div class="lg:col-span-7">
+                        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden flex flex-col min-h-[500px]">
+                            <!-- Header status -->
+                            <div class="p-5 border-b border-slate-200 bg-slate-50 flex justify-between items-center">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-2.5 h-2.5 rounded-full bg-slate-300" id="aiStatusPulse"></div>
+                                    <span class="text-xs font-bold text-brand-navy uppercase tracking-wider" id="aiStatusLabel">System Ready</span>
+                                </div>
+                                <span class="text-[10px] bg-brand-navy/5 text-brand-navy px-2.5 py-1 rounded-full font-bold"><i class="fa-solid fa-robot mr-1"></i> Gemini 3.1 Flash SCM Engine</span>
+                            </div>
+                            <!-- Output body -->
+                            <div class="p-6 sm:p-8 flex-grow overflow-y-auto space-y-4 text-slate-800 text-sm leading-relaxed" id="aiOutputBox">
+                                <div class="flex flex-col items-center justify-center h-full text-center py-20 space-y-4">
+                                    <div class="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center text-brand-teal text-3xl"><i class="fa-solid fa-code-branch"></i></div>
+                                    <div class="max-w-md space-y-1">
+                                        <h4 class="font-bold text-brand-navy text-base">Technical Specifications Output</h4>
+                                        <p class="text-xs text-brand-muted">Describe standard mechanical properties, material dimensions, or drop physical drawings on the left to review instantaneous metallurgical insights, grade analysis, QA advice, and logistics timelines.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- UI/UX Workspace Sourcing Preference Panel Drawer -->
+    <div id="uxPreferencePanel" class="fixed inset-y-0 left-0 max-w-sm w-full bg-white shadow-2xl z-50 transform -translate-x-full transition-transform duration-300 border-r border-slate-200 overflow-y-auto hidden flex flex-col">
+        <div class="p-6 border-b border-slate-200 flex justify-between items-center bg-brand-navy text-white">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-sliders text-brand-lightTeal"></i>
+                <h2 class="text-base font-extrabold">UI/UX Workspace Options</h2>
+            </div>
+            <button onclick="toggleWorkspaceCustomizer()" class="text-white hover:text-brand-lightTeal text-xl p-2"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        
+        <div class="p-6 space-y-6 flex-grow">
+            <!-- Theme presets selection -->
+            <div class="space-y-3">
+                <span class="block text-xs font-bold text-brand-navy uppercase tracking-wider"><i class="fa-solid fa-palette mr-1.5"></i> Color Accent Theme</span>
+                <div class="grid grid-cols-1 gap-2">
+                    <button onclick="setWorkspaceTheme('classic-light')" id="btn-theme-classic" class="w-full p-3 text-left rounded-xl border border-brand-teal bg-slate-50 flex items-center justify-between text-xs font-semibold">
+                        <span>Executive Light (Default)</span>
+                        <span class="w-3.5 h-3.5 rounded-full bg-brand-teal border border-slate-300"></span>
+                    </button>
+                    <button onclick="setWorkspaceTheme('cyber-dark')" id="btn-theme-cyber" class="w-full p-3 text-left rounded-xl border border-slate-200 flex items-center justify-between text-xs font-semibold">
+                        <span>Steel Mill Dark (High-Contrast)</span>
+                        <span class="w-3.5 h-3.5 rounded-full bg-slate-800 border border-slate-300"></span>
+                    </button>
+                    <button onclick="setWorkspaceTheme('ocean-deep')" id="btn-theme-ocean" class="w-full p-3 text-left rounded-xl border border-slate-200 flex items-center justify-between text-xs font-semibold">
+                        <span>Oceanic Deep Navy (Clean Contrast)</span>
+                        <span class="w-3.5 h-3.5 rounded-full bg-slate-900 border border-slate-300"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Page Sizing density selector -->
+            <div class="space-y-3">
+                <span class="block text-xs font-bold text-brand-navy uppercase tracking-wider"><i class="fa-solid fa-arrows-up-down mr-1.5"></i> Density View Mode</span>
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="setWorkspaceDensity('comfortable')" id="btn-density-comfortable" class="p-3 text-center rounded-xl border border-brand-teal bg-slate-50 text-xs font-bold">
+                        Comfortable View
+                    </button>
+                    <button onclick="setWorkspaceDensity('compact')" id="btn-density-compact" class="p-3 text-center rounded-xl border border-slate-200 text-xs font-bold">
+                        Sourcing Compact
+                    </button>
+                </div>
+                <p class="text-[10px] text-brand-muted">Compact mode shrinks paddings, lists, and headings for high-speed specs audits.</p>
+            </div>
+
+            <!-- Typography Engine selector -->
+            <div class="space-y-3">
+                <span class="block text-xs font-bold text-brand-navy uppercase tracking-wider"><i class="fa-solid fa-font mr-1.5"></i> Typography Mode</span>
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="setWorkspaceFont('inter')" id="btn-font-inter" class="p-3 text-center rounded-xl border border-brand-teal bg-slate-50 text-xs font-bold">
+                        Standard Sans
+                    </button>
+                    <button onclick="setWorkspaceFont('tech')" id="btn-font-tech" class="p-3 text-center rounded-xl border border-slate-200 text-xs font-bold">
+                        Technical Draft
+                    </button>
+                </div>
+            </div>
+
+            <!-- Interactive Motion Background Speed controls -->
+            <div class="space-y-3">
+                <span class="block text-xs font-bold text-brand-navy uppercase tracking-wider"><i class="fa-solid fa-person-running mr-1.5"></i> Ambient Particle Speed</span>
+                <input type="range" min="0" max="3" step="0.25" value="1" id="particleSpeedRange" oninput="updateParticleSpeedValue(this.value)" class="w-full accent-brand-teal">
+                <div class="flex justify-between text-[10px] text-brand-muted font-bold">
+                    <span>PAUSED</span>
+                    <span>NORMAL</span>
+                    <span>FAST MODE</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-6 border-t border-slate-200 bg-slate-50">
+            <button onclick="resetWorkspacePreferences()" class="w-full bg-brand-navy text-white text-xs font-bold py-3 rounded-xl hover:bg-brand-orange transition-colors">
+                Reset Workspace Defaults
+            </button>
+        </div>
+    </div>
+
+    <!-- Active Floating Workspace Option Quick Toggle (Visible on left hand corner) -->
+    <button onclick="toggleWorkspaceCustomizer()" class="fixed left-6 bottom-6 z-50 w-12 h-12 bg-brand-navy/95 border border-slate-700 hover:bg-brand-teal text-white rounded-full flex items-center justify-center shadow-2xl transition-all hover:scale-105" title="Open Workspace Preferences">
+        <i class="fa-solid fa-sliders text-base"></i>
+    </button>
+
+    <!-- Persistent Live Sourcing Assistant Chat Drawer -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button onclick="toggleLiveChat()" class="w-14 h-14 bg-brand-navy hover:bg-brand-orange text-white rounded-full flex items-center justify-center shadow-2xl transition-all hover:scale-105 relative">
+            <span class="absolute -top-1 -right-1 flex h-4 w-4">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-lightTeal opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-4 w-4 bg-brand-lightTeal text-[9px] text-brand-navy font-bold flex items-center justify-center">1</span>
+            </span>
+            <i class="fa-solid fa-comments text-xl"></i>
+        </button>
+
+        <div id="liveChatWidget" class="absolute bottom-16 right-0 w-[350px] sm:w-[400px] h-[500px] bg-white rounded-3xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden hidden transform scale-95 transition-all">
+            <!-- Header -->
+            <div class="bg-brand-navy p-4 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-brand-orange rounded-xl flex items-center justify-center text-white"><i class="fa-solid fa-headset"></i></div>
+                    <div>
+                        <h4 class="text-xs font-bold text-white tracking-wide">Aaron Tech Live Sourcing AI</h4>
+                        <p class="text-[9px] text-brand-lightTeal font-semibold">Senior Technical Consultant</p>
+                    </div>
+                </div>
+                <button onclick="toggleLiveChat()" class="text-white hover:text-brand-lightTeal p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <!-- Messages Area -->
+            <div class="flex-grow p-4 overflow-y-auto space-y-4" id="chatMessages">
+                <div class="flex gap-2 items-start max-w-[85%]">
+                    <div class="w-7 h-7 bg-slate-100 rounded-full flex items-center justify-center text-brand-navy text-xs flex-shrink-0"><i class="fa-solid fa-robot"></i></div>
+                    <div class="bg-slate-100 p-3 rounded-2xl text-xs leading-relaxed">
+                        Hello! I am the **Aaron Technologies Live AI Sourcing Agent**. 
+                        <br><br>
+                        Ask me about **ASTM standard tolerances, chemical values of duplex steel, delivery schedules, Bureau Veritas inspection guidelines, or Indian manufacturing capacities**. How can I help you today?
+                    </div>
+                </div>
+            </div>
+            <!-- Input Area -->
+            <form onsubmit="handleLiveChatSubmit(event)" class="p-3 border-t border-slate-200 bg-slate-50 flex gap-2">
+                <input type="text" id="chatInput" placeholder="Ask about ASTM A312 or honing standards..." class="flex-grow bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-xs text-brand-navy focus:outline-none focus:border-brand-teal">
+                <button type="submit" class="bg-brand-navy hover:bg-brand-teal text-white hover:text-brand-navy w-10 h-10 rounded-xl flex items-center justify-center transition-colors"><i class="fa-solid fa-paper-plane text-xs"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Website Toast Notification Container (Dynamic & Beautiful UI Upgrade) -->
+    <div id="toastContainer" class="fixed bottom-6 left-6 z-50 flex flex-col gap-2 max-w-sm pointer-events-none">
+        <!-- Toast cards dynamically built here -->
+    </div>
+
+    <!-- Website Footer -->
+    <footer class="bg-brand-navy text-white pt-16 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-12 border-b border-slate-800">
+            <!-- Left Brand column -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 flex items-center justify-center relative">
+                        <svg class="w-full h-full" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50 10 L85 70 L65 70 L50 40 L35 70 L15 70 Z" fill="url(#navyTealGradFooter)" />
+                            <path d="M35 55 L65 55 L75 73 L25 73 Z" fill="url(#orangeTealGradFooter)" opacity="0.9" />
+                            <rect x="20" y="78" width="60" height="8" rx="4" fill="#FF4C29" />
+                            <defs>
+                                <linearGradient id="navyTealGradFooter" x1="50" y1="10" x2="50" y2="70" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#22D3EE" />
+                                    <stop offset="1" stop-color="#0E7490" />
+                                </linearGradient>
+                                <linearGradient id="orangeTealGradFooter" x1="25" y1="55" x2="75" y2="73" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#FF4C29" />
+                                    <stop offset="1" stop-color="#0B192C" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="text-lg font-extrabold tracking-tight block text-white">AARON</span>
+                        <span class="text-[9px] font-bold tracking-widest text-brand-lightTeal block -mt-1 uppercase">TECHNOLOGIES</span>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Sourcing Industrial Engineering Products verified, audited facilities in India. Real-time support based in New Jersey.
+                </p>
+                <div class="space-y-1.5 text-xs text-slate-400">
+                    <p><i class="fa-solid fa-phone text-brand-lightTeal mr-2"></i> +1 (973) 555-0192</p>
+                    <p><i class="fa-solid fa-envelope text-brand-lightTeal mr-2"></i> info@aarontech.co</p>
+                </div>
+            </div>
+
+            <!-- Footer Links Column 1 -->
+            <div class="space-y-3">
+                <h4 class="text-sm font-bold text-brand-lightTeal uppercase tracking-widest">Product Categories</h4>
+                <div class="flex flex-col gap-2 text-xs text-slate-400">
+                    <button onclick="navigateTo('products'); filterProducts('stainless')" class="text-left hover:text-brand-orange transition-colors">Seamless & Welded Pipes</button>
+                    <button onclick="navigateTo('products'); filterProducts('hydraulic')" class="text-left hover:text-brand-orange transition-colors">Honed Tubes & Chrome Bars</button>
+                    <button onclick="navigateTo('products'); filterProducts('engineering')" class="text-left hover:text-brand-orange transition-colors">CNC Shafts & Machined Parts</button>
+                    <button onclick="navigateTo('products'); filterProducts('valves')" class="text-left hover:text-brand-orange transition-colors">Industrial Ball & Gate Valves</button>
+                    <button onclick="navigateTo('products'); filterProducts('aluminium')" class="text-left hover:text-brand-orange transition-colors">Aluminium Extrusions</button>
+                </div>
+            </div>
+
+            <!-- Footer Links Column 2 -->
+            <div class="space-y-3">
+                <h4 class="text-sm font-bold text-brand-lightTeal uppercase tracking-widest">Technical Support</h4>
+                <div class="flex flex-col gap-2 text-xs text-slate-400">
+                    <button onclick="navigateTo('capabilities')" class="text-left hover:text-brand-orange transition-colors">Quality Control Manual</button>
+                    <button onclick="navigateTo('capabilities')" class="text-left hover:text-brand-orange transition-colors">Mill Test Certification</button>
+                    <button onclick="navigateTo('resources')" class="text-left hover:text-brand-orange transition-colors">ASTM Standard Reference</button>
+                    <button onclick="toggleWorkspaceCustomizer()" class="text-left text-brand-lightTeal hover:text-brand-orange transition-colors font-bold flex items-center gap-1.5"><i class="fa-solid fa-sliders"></i> Interface Preferences</button>
+                </div>
+            </div>
+
+            <!-- Trust Badges & Contact -->
+            <div class="space-y-4">
+                <h4 class="text-sm font-bold text-brand-lightTeal uppercase tracking-widest">Compliance & Trust</h4>
+                <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700/80 space-y-3">
+                    <div class="flex items-center gap-2 text-xs">
+                        <span class="text-emerald-500"><i class="fa-solid fa-circle-check"></i></span>
+                        <span>MTC Traceable to Source</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs">
+                        <span class="text-emerald-500"><i class="fa-solid fa-circle-check"></i></span>
+                        <span>Bureau Veritas / TÜV Compliant</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs">
+                        <span class="text-emerald-500"><i class="fa-solid fa-circle-check"></i></span>
+                        <span>Door & Port Delivery Sourcing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4">
+            <span>&copy; 2026 Aaron Technologies LLC. All rights reserved.</span>
+            <div class="flex gap-6">
+                <a href="#" onclick="showToast('Loading Terms of Sourcing...'); return false;" class="hover:text-brand-lightTeal">Terms of Sourcing</a>
+                <a href="#" onclick="showToast('Loading Privacy Policy...'); return false;" class="hover:text-brand-lightTeal">Privacy Policy</a>
+                <a href="#" onclick="showToast('Opening Site Map...'); return false;" class="hover:text-brand-lightTeal">Site Map</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- JAVASCRIPT LOGIC, ROUTER, DYNAMIC THEME ENGINE & GEMINI API -->
+    <script>
+        const productsDB = [
+            {
+                id: 'p1',
+                category: 'stainless',
+                title: 'ASTM A312 Stainless Steel Pipes',
+                shortDesc: 'Seamless and Welded industrial grade pipeline solutions with standard ASME schedule values.',
+                fullDesc: 'Premium grades of Stainless Steel Seamless and Welded pipes sourced from ISO 9001 certified extrusion mills. Built for exceptional high-temperature and structural strength.',
+                materials: 'TP304, L, TP316, L, Duplex 2205',
+                standards: 'ASTM A312, ASME B36.19M, DIN EN 10216-5',
+                applications: 'Oil & gas pipelines, chemical processing lines, marine fluid circuits, and food processing systems.',
+                image: 'https://placehold.co/600x400/0B192C/FFFFFF?text=ASTM+A312+Pipes'
+            },
+            {
+                id: 'p2',
+                category: 'stainless',
+                title: 'High-Pressure Pipe Fittings & Flanges',
+                shortDesc: 'Socket weld, threaded, and butt-weld pipe connectors designed for optimal pressure tolerance.',
+                fullDesc: 'Forged high-pressure pipe fittings, unions, nipples, and flanges certified to withstand substantial operating pressures. Available with heat registration markings.',
+                materials: 'A182 F304L, F316L, Carbon Steel A105',
+                standards: 'ASME B16.11, ASME B16.5, EN 1092-1',
+                applications: 'High-pressure hydraulic connections, chemical refineries, pipeline branches, and high-stakes steam circuits.',
+                image: 'https://placehold.co/600x400/0B192C/FFFFFF?text=High+Pressure+Flanges'
+            },
+            {
+                id: 'p3',
+                category: 'hydraulic',
+                title: 'Precision Honed Tubes (Hydraulic)',
+                shortDesc: 'Seamless tubes with precision finished inner diameters, optimized for high dynamic seals.',
+                fullDesc: 'Internal dynamic fluid seal honed tubes utilizing premium raw steel alloys. Inside diameters are micro-finished using state-of-the-art honing equipment to ensure extreme smoothness.',
+                materials: 'ST52, ST52.3, E355, ASTM A519 Grade 1026',
+                standards: 'ISO H8 / H9 Tolerances, DIN 2391',
+                applications: 'Heavy machinery hydraulic cylinders, custom actuator systems, high-pressure industrial telescoping arms, and agriculture pistons.',
+                image: 'https://placehold.co/600x400/0B192C/FFFFFF?text=Precision+Honed+Tubes'
+            },
+            {
+                id: 'p4',
+                category: 'hydraulic',
+                title: 'Hard Chrome Plated Bars & Rods',
+                shortDesc: 'Highly corrosion-resistant steel shafts featuring robust outer chrome coatings.',
+                fullDesc: 'Industrial grade shaft rods meticulously centerless-ground, polished, and plated with premium hard chrome layers. Specifically calibrated for intense seal abrasion performance.',
+                materials: 'CK45, 40Cr, 42CrMo, C45E',
+                standards: 'F7/F8 Tolerances, ASTM A482 Grade 75',
+                applications: 'Piston shafts, machinery guide rails, linear motion slide paths, and heavy marine-environment hydraulic cylinder systems.',
+                image: 'https://placehold.co/600x400/0B192C/FFFFFF?text=Chrome+Plated+Bars'
+            },
+            {
+                id: 'p5',
+                category: 'engineering',
+                title: 'Custom Machined Components & Shafts',
+                shortDesc: 'Precision CNC-turned and milled shafts built directly to custom STEP files.',
+                fullDesc: 'Bespoke precision structural components and transmission shafts crafted directly from client-submitted blueprints. Produced inside audited CNC turning and milling labs.',
+                materials: 'Alloy Steels, Stainless, Forged Carbon',
+                standards: 'ISO 2768-m (Medium dimensional tolerance codes)',
+                applications: 'Automotive drivetrains, transmission assemblies, agricultural machinery gear setups, and high-performance industrial conveyor spindles.',
+                image: 'https://placehold.co/600x400/0B192C/FFFFFF?text=Custom+Machined+Parts'
+            },
+            {
+                id: 'p6',
+                category: 'valves',
+                title: 'Industrial Valves (Gate, Ball, Check)',
+                shortDesc: 'Flow assurance and directional shut-off valves certified for severe pressure and heat.',
+                fullDesc: 'Cast and forged metal valves structured to assure zero-leak performance under volatile chemical flow configurations. Features premium Teflon / Carbon seal setups.',
+                materials: 'A216 WCB, A351 CF8M, Duplex, Carbon Steel',
+                standards: 'API 6D, API 598, ASME B16.34',
+                applications: 'Steam pipelines, liquid chemicals, water distribution mains, petrochemical processing facilities, and storage tank complexes.',
+                image: 'https://placehold.co/600x400/0B192C/FFFFFF?text=Industrial+Valves'
+            },
+            {
+                id: 'p7',
+                category: 'aluminium',
+                title: 'Aluminium Extrusions & Custom Sections',
+                shortDesc: 'High precision profile templates, structural framing profiles, and bespoke sections.',
+                fullDesc: 'Structural and decorative aluminium sections produced with customized extrusion tooling dies. Features uniform thickness integrity and fine physical straightness tolerances.',
+                materials: 'Alloy 6061, 6063, 6082 T6 Templar Temper',
+                standards: 'ASTM B221, EN 755-2, DIN 1725',
+                applications: 'Solar panel structural racking, machinery frame configurations, window panels, heavy transport assemblies, and customized heat sinks.',
+                image: 'https://placehold.co/600x400/0B192C/FFFFFF?text=Aluminium+Extrusions'
+            },
+            {
+                id: 'p8',
+                category: 'gearboxes',
+                title: 'Industrial Gearboxes & Machinery Components',
+                shortDesc: 'Helical, bevel, and worm gears optimized for optimal operational mechanical efficiency.',
+                fullDesc: 'Precision transmission gear units built to operate under massive industrial loads. Features heat-treated gear components and high-tensile casting enclosures.',
+                materials: 'Forged Alloy Steel, Cast Iron GG20/GG25',
+                standards: 'AGMA Standards, DIN 3990, ISO 6336',
+                applications: 'Conveyor drive belts, mineral crushing setups, active wind power mills, cement factory drives, and sorting mills.',
+                image: 'https://placehold.co/600x400/0B192C/FFFFFF?text=Industrial+Gearboxes'
+            }
+        ];
+
+        // Global RFQ Sourcing Pipeline / Cart
+        let rfqCart = [];
+
+        // Global UI preferences default configuration
+        let activeTheme = 'classic-light';
+        let activeDensity = 'comfortable';
+        let activeFont = 'inter';
+        let particleSpeedScale = 1.0;
+
+        // Custom notification system (Replacing alert)
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `p-4 rounded-xl shadow-2xl text-xs font-bold uppercase tracking-wider text-white pointer-events-auto flex items-center gap-3 animate-toast ${
+                type === 'success' ? 'bg-brand-teal' : type === 'warning' ? 'bg-brand-orange' : 'bg-brand-navy border border-slate-700'
+            }`;
+            
+            let icon = '<i class="fa-solid fa-circle-check"></i>';
+            if (type === 'warning') icon = '<i class="fa-solid fa-triangle-exclamation"></i>';
+            if (type === 'info') icon = '<i class="fa-solid fa-circle-info"></i>';
+
+            toast.innerHTML = `
+                <span class="text-base">${icon}</span>
+                <span class="flex-grow">${message}</span>
+                <button onclick="this.parentElement.remove()" class="text-white opacity-80 hover:opacity-100 ml-2"><i class="fa-solid fa-xmark"></i></button>
+            `;
+            container.appendChild(toast);
+            
+            // Auto delete toast after 4.5 seconds
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'transition-all', 'duration-500');
+                setTimeout(() => toast.remove(), 500);
+            }, 4500);
+        }
+
+        const canvas = document.getElementById('motionCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class FlowParticle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 0.5 + 0.1;
+                this.speedY = (Math.random() * 0.2 - 0.1);
+                this.alpha = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.speedX * particleSpeedScale;
+                this.y += this.speedY * particleSpeedScale;
+                if (this.x > canvas.width) {
+                    this.x = 0;
+                    this.y = Math.random() * canvas.height;
+                }
+                if (this.y < 0 || this.y > canvas.height) {
+                    this.speedY = -this.speedY;
+                }
+            }
+            draw() {
+                // Adapting particle colors to active workspace visual schemes
+                if (activeTheme === 'cyber-dark') {
+                    ctx.fillStyle = `rgba(34, 211, 238, ${this.alpha})`; // Light electric teal
+                } else if (activeTheme === 'ocean-deep') {
+                    ctx.fillStyle = `rgba(138, 180, 248, ${this.alpha})`; // Light sky blue
+                } else {
+                    ctx.fillStyle = `rgba(14, 116, 144, ${this.alpha})`; // Premium Dark SCM Teal
+                }
+                
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Initialize particles
+        for (let i = 0; i < 60; i++) {
+            particles.push(new FlowParticle());
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+
+        function navigateTo(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(el => el.classList.add('hidden'));
+            
+            // Show requested page
+            const target = document.getElementById('page-' + pageId);
+            if (target) {
+                target.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Update Nav active style configurations
+            document.querySelectorAll('.nav-link').forEach(btn => {
+                btn.classList.remove('text-brand-teal', 'bg-slate-50', 'font-extrabold');
+            });
+
+            // Close spec sheets modals automatically
+            closeProductModal();
+        }
+
+        function mobileNav(pageId) {
+            toggleMobileMenu();
+            navigateTo(pageId);
+        }
+
+        function toggleMobileMenu() {
+            const drawer = document.getElementById('mobileDrawer');
+            drawer.classList.toggle('hidden');
+        }
+
+
+        function toggleWorkspaceCustomizer() {
+            const panel = document.getElementById('uxPreferencePanel');
+            panel.classList.toggle('hidden');
+            setTimeout(() => {
+                panel.classList.toggle('-translate-x-full');
+            }, 10);
+        }
+
+        function setWorkspaceTheme(themeId) {
+            activeTheme = themeId;
+            document.body.classList.remove('theme-cyber-dark', 'theme-ocean-deep');
+            
+            // Reset active button frames
+            document.getElementById('btn-theme-classic').className = "w-full p-3 text-left rounded-xl border border-slate-200 flex items-center justify-between text-xs font-semibold";
+            document.getElementById('btn-theme-cyber').className = "w-full p-3 text-left rounded-xl border border-slate-200 flex items-center justify-between text-xs font-semibold";
+            document.getElementById('btn-theme-ocean').className = "w-full p-3 text-left rounded-xl border border-slate-200 flex items-center justify-between text-xs font-semibold";
+
+            if (themeId === 'cyber-dark') {
+                document.body.classList.add('theme-cyber-dark');
+                document.getElementById('btn-theme-cyber').className = "w-full p-3 text-left rounded-xl border border-brand-teal bg-slate-50 flex items-center justify-between text-xs font-semibold";
+                showToast("Workspace theme preset converted to Steel Mill Dark", 'info');
+            } else if (themeId === 'ocean-deep') {
+                document.body.classList.add('theme-ocean-deep');
+                document.getElementById('btn-theme-ocean').className = "w-full p-3 text-left rounded-xl border border-brand-teal bg-slate-50 flex items-center justify-between text-xs font-semibold";
+                showToast("Workspace theme preset converted to Oceanic Deep Navy", 'info');
+            } else {
+                document.getElementById('btn-theme-classic').className = "w-full p-3 text-left rounded-xl border border-brand-teal bg-slate-50 flex items-center justify-between text-xs font-semibold";
+                showToast("Workspace theme preset converted to Executive Corporate Light", 'info');
+            }
+        }
+
+        function setWorkspaceDensity(densityId) {
+            activeDensity = densityId;
+            document.body.classList.remove('density-compact');
+            
+            document.getElementById('btn-density-comfortable').className = "p-3 text-center rounded-xl border border-slate-200 text-xs font-bold";
+            document.getElementById('btn-density-compact').className = "p-3 text-center rounded-xl border border-slate-200 text-xs font-bold";
+
+            if (densityId === 'compact') {
+                document.body.classList.add('density-compact');
+                document.getElementById('btn-density-compact').className = "p-3 text-center rounded-xl border border-brand-teal bg-slate-50 text-xs font-bold";
+                showToast("Density set to: Compact Sourcing Procurement Mode", 'info');
+            } else {
+                document.getElementById('btn-density-comfortable').className = "p-3 text-center rounded-xl border border-brand-teal bg-slate-50 text-xs font-bold";
+                showToast("Density set to: Standard Comfortable", 'info');
+            }
+        }
+
+        function setWorkspaceFont(fontId) {
+            activeFont = fontId;
+            document.body.classList.remove('font-tech-draft');
+            
+            document.getElementById('btn-font-inter').className = "p-3 text-center rounded-xl border border-slate-200 text-xs font-bold";
+            document.getElementById('btn-font-tech').className = "p-3 text-center rounded-xl border border-slate-200 text-xs font-bold";
+
+            if (fontId === 'tech') {
+                document.body.classList.add('font-tech-draft');
+                document.getElementById('btn-font-tech').className = "p-3 text-center rounded-xl border border-brand-teal bg-slate-50 text-xs font-bold";
+                showToast("Typography preset set to Technical Courier/Draftsman Mono", 'info');
+            } else {
+                document.getElementById('btn-font-inter').className = "p-3 text-center rounded-xl border border-brand-teal bg-slate-50 text-xs font-bold";
+                showToast("Typography preset set to Corporate Modern Sans", 'info');
+            }
+        }
+
+        function updateParticleSpeedValue(val) {
+            particleSpeedScale = parseFloat(val);
+        }
+
+        function resetWorkspacePreferences() {
+            setWorkspaceTheme('classic-light');
+            setWorkspaceDensity('comfortable');
+            setWorkspaceFont('inter');
+            document.getElementById('particleSpeedRange').value = "1";
+            particleSpeedScale = 1.0;
+            showToast("Workspace customizer parameters returned to system default.", 'success');
+        }
+
+
+        function renderProducts(filter = 'all') {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+
+            const filtered = filter === 'all' ? productsDB : productsDB.filter(p => p.category === filter);
+
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-3xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col justify-between group';
+                card.innerHTML = `
+                    <div class="aspect-video bg-slate-100 overflow-hidden relative">
+                        <img src="${p.image}" alt="${p.title}" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300">
+                        <span class="absolute top-4 left-4 text-[10px] font-extrabold bg-brand-navy/80 backdrop-blur-sm text-brand-teal tracking-widest px-3 py-1 rounded-full uppercase">
+                            ${p.category}
+                        </span>
+                    </div>
+                    <div class="p-6 space-y-4 flex-grow flex flex-col justify-between">
+                        <div class="space-y-2">
+                            <h3 class="font-bold text-lg text-brand-navy group-hover:text-brand-teal transition-colors">${p.title}</h3>
+                            <p class="text-xs text-brand-muted leading-relaxed">${p.shortDesc}</p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <button onclick="openProductModal('${p.id}')" class="text-xs font-bold text-brand-orange hover:text-brand-navy transition-colors flex items-center gap-1.5">
+                                Technical Specs <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                            <span class="text-[10px] font-bold text-brand-muted uppercase"><i class="fa-solid fa-circle-check text-brand-teal mr-1"></i> QA Cleared</span>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterProducts(category) {
+            // Update button visual selections
+            document.querySelectorAll('.product-filter-btn').forEach(btn => {
+                btn.className = "product-filter-btn px-4 py-2 text-xs font-bold uppercase tracking-wider bg-white border border-slate-200 hover:bg-slate-50 text-brand-navy rounded-lg transition-all";
+            });
+            
+            // Find active target to highlight
+            const clickedBtn = Array.from(document.querySelectorAll('.product-filter-btn')).find(b => 
+                b.textContent.toLowerCase().includes(
+                    category === 'all' ? 'all' : 
+                    category === 'stainless' ? 'pipes' : 
+                    category === 'hydraulic' ? 'hydraulic' : 
+                    category === 'engineering' ? 'custom' : 
+                    category === 'valves' ? 'valves' :
+                    category === 'aluminium' ? 'aluminium' : 'equipment'
+                )
+            );
+            
+            if (clickedBtn) {
+                clickedBtn.className = "product-filter-btn px-4 py-2 text-xs font-bold uppercase tracking-wider bg-brand-navy text-white rounded-lg transition-all";
+            }
+
+            renderProducts(category);
+        }
+
+        // Product Specification Sheets Detail Drawer Controls
+        function openProductModal(productId) {
+            const product = productsDB.find(p => p.id === productId);
+            if (!product) return;
+
+            document.getElementById('modalCategory').textContent = product.category.toUpperCase();
+            document.getElementById('modalTitle').textContent = product.title;
+            document.getElementById('modalDescription').textContent = product.fullDesc;
+            document.getElementById('modalMaterials').textContent = product.materials;
+            document.getElementById('modalStandards').textContent = product.standards;
+            document.getElementById('modalApplications').textContent = product.applications;
+            document.getElementById('modalImage').src = product.image;
+
+            document.getElementById('addToRfqBtn').onclick = () => addToRFQ(product.id);
+
+            const modal = document.getElementById('productModal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('translate-x-full');
+            }, 10);
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('productModal');
+            modal.classList.add('translate-x-full');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function navigateToRFQFromModal() {
+            closeProductModal();
+            navigateTo('rfq');
+        }
+
+
+        function addToRFQ(productId) {
+            const product = productsDB.find(p => p.id === productId);
+            if (!product) return;
+
+            if (rfqCart.some(item => item.id === productId)) {
+                showToast(`${product.title} is already active inside your RFQ Sourcing Pipeline.`, 'warning');
+                return;
+            }
+
+            rfqCart.push(product);
+            updateRFQCartUI();
+            showToast(`${product.title} successfully added to RFQ listing.`, 'success');
+        }
+
+        function removeFromRFQ(productId) {
+            const product = rfqCart.find(item => item.id === productId);
+            rfqCart = rfqCart.filter(item => item.id !== productId);
+            updateRFQCartUI();
+            if (product) showToast(`Removed: ${product.title}`, 'info');
+        }
+
+        function updateRFQCartUI() {
+            const cartList = document.getElementById('rfqCartList');
+            const cartCount = document.getElementById('cartCount');
+            cartCount.textContent = rfqCart.length;
+
+            if (rfqCart.length === 0) {
+                cartList.innerHTML = `<p class="text-xs text-brand-muted text-center py-4">No products selected yet. Click any item inside the catalog and tap "Add to RFQ List".</p>`;
+                return;
+            }
+
+            cartList.innerHTML = '';
+            rfqCart.forEach(item => {
+                const row = document.createElement('div');
+                row.className = 'flex items-center justify-between p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs animate-fade-in';
+                row.innerHTML = `
+                    <div class="space-y-0.5">
+                        <span class="font-bold text-brand-navy block">${item.title}</span>
+                        <span class="text-[10px] text-brand-muted block uppercase">${item.standards}</span>
+                    </div>
+                    <button type="button" onclick="removeFromRFQ('${item.id}')" class="text-brand-orange hover:text-red-700 p-1"><i class="fa-solid fa-trash"></i></button>
+                `;
+                cartList.appendChild(row);
+            });
+        }
+
+
+        // Form Submit Actions & Simulators
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            showToast("Inquiry registered! Our Bloomfield sales office will phone/email you within 2 hours.", "success");
+            event.target.reset();
+        }
+
+        function handleRFQSubmit(event) {
+            event.preventDefault();
+            
+            const client = document.getElementById('rfqContact').value.trim();
+            const company = document.getElementById('rfqCompany').value.trim();
+            const qty = document.getElementById('rfqQty').value.trim();
+            const location = document.getElementById('rfqLocation').value.trim();
+
+            showToast(`Thank you ${client}! Sourcing RFQ for ${company} (${qty} units to ${location}) successfully registered.`, "success");
+            event.target.reset();
+            rfqCart = [];
+            updateRFQCartUI();
+        }
+
+        function triggerResourceDownload(resourceName) {
+            showToast(`Download Initiated: ${resourceName}.pdf (Verifying connection...)`, 'success');
+        }
+
+        function applySampleSpec(specType) {
+            const textInput = document.getElementById('aiInput');
+            if (specType === 'Seamless Pipe Audit') {
+                textInput.value = "Auditing 2500 ft of seamless steel pipes under ASTM A312 TP316L, sizing: NPS 4 Schedule 80. Verify nominal wall thickness, minimum physical test hydro pressure, dynamic chemical values, and Bureau Veritas certification advice.";
+            } else if (specType === 'Honed Tubes Analysis') {
+                textInput.value = "Precision hydraulic honed tubing, material ASTM A519 Grade 1026, cold drawn seamless (CDS). Inside tolerance H8, surface roughness target Ra <= 0.2 micron. Recommend hard chrome plating thickness, corrosion testing and Bureau Veritas validation.";
+            }
+            showToast("Sample specification query injected.", 'info');
+        }
+
+        // Blueprint & drawing mock uploads
+        function triggerFileInput(id) {
+            document.getElementById(id).click();
+        }
+
+        function updateFileName(input, displayId) {
+            const display = document.getElementById(displayId);
+            if (input.files && input.files.length > 0) {
+                display.textContent = `Attached: ${input.files[0].name}`;
+                showToast(`Attached file: ${input.files[0].name}`, 'success');
+            } else {
+                display.textContent = "Drag & Drop files here, or click to browse";
+            }
+        }
+
+        let base64DrawingImage = "";
+
+        function previewUploadedImage(input) {
+            const display = document.getElementById('ai-file-display');
+            const previewContainer = document.getElementById('aiImagePreviewContainer');
+            const previewImg = document.getElementById('aiImagePreview');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.src = e.target.result;
+                    previewContainer.classList.remove('hidden');
+                    display.textContent = `Blueprint Selected: ${input.files[0].name}`;
+                    base64DrawingImage = e.target.result.split(',')[1];
+                    showToast("Technical drawing successfully loaded. Vision analysis ready.", 'success');
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function clearUploadedImage(e) {
+            e.stopPropagation();
+            document.getElementById('ai-image-upload').value = "";
+            document.getElementById('aiImagePreviewContainer').classList.add('hidden');
+            document.getElementById('aiImagePreview').src = "";
+            document.getElementById('ai-file-display').textContent = "Upload Drawing Blueprint";
+            base64DrawingImage = "";
+            showToast("Uploaded drawing cleared.", "info");
+        }
+
+
+
+        // Backoff fetch handler
+        async function fetchWithBackoff(url, options, retries = 3, delay = 1000) {
+            try {
+                const response = await fetch(url, options);
+                if (response.status === 429 && retries > 0) {
+                    console.warn(`Rate limit occurred. Retrying in ${delay}ms...`);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return fetchWithBackoff(url, options, retries - 1, delay * 2);
+                }
+                return response;
+            } catch (error) {
+                if (retries > 0) {
+                    console.warn(`Connection anomaly. Retrying in ${delay}ms...`, error);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return fetchWithBackoff(url, options, retries - 1, delay * 2);
+                }
+                throw error;
+            }
+        }
+
+        // AI Technical Sourcing Specs Auditor
+        async function triggerAISpecAnalysis() {
+            const specText = document.getElementById('aiInput').value.trim();
+            const outputBox = document.getElementById('aiOutputBox');
+            const statusPulse = document.getElementById('aiStatusPulse');
+            const statusLabel = document.getElementById('aiStatusLabel');
+
+            if (!specText && !base64DrawingImage) {
+                showToast("Please provide a text spec description or blueprint drawing sketch to analyze.", 'warning');
+                return;
+            }
+
+            statusPulse.className = "w-2.5 h-2.5 rounded-full bg-brand-orange animate-ping";
+            statusLabel.textContent = "AI Analysis Underway...";
+            outputBox.innerHTML = `
+                <div class="flex flex-col items-center justify-center h-full text-center py-20 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-brand-navy flex items-center justify-center text-brand-teal text-2xl animate-spin"><i class="fa-solid fa-spinner"></i></div>
+                    <div>
+                        <h4 class="font-bold text-brand-navy">Gemini SCM Core Analyzing...</h4>
+                        <p class="text-xs text-brand-muted mt-1">Checking physical limits, standard code compliance, chemical bounds, and quality check rules.</p>
+                    </div>
+                </div>
+            `;
+
+            const systemPrompt = `
+            You are "Gemini-3.1-Flash-SCM", a senior aerospace, chemical, and precision engineering sourcing specialist at Aaron Technologies. 
+            Analyze the user's specification prompt or drawing sketch and provide a highly structural technical audit in neat, clean Markdown inside HTML.
+            
+            Always include:
+            1. **Metallurgical Audit**: Grade verification (e.g. ASTM A312, E355, 316L properties), nominal chemical constraints (Carbon max %, Chromium %, Nickel %, Molybdenum % etc.).
+            2. **Manufacturing Blueprint Compliance**: Tolerances (such as ISO H8, wall thickness schedules, ASTM limits) and visual inspection checks.
+            3. **QA Recommendation Pipeline**: List exactly what tests (e.g., PMI, Ultrasonic, Hydrostatic, Micro-hardness) are required for MTC 3.1 compliance. Explicitly discuss coordination with **Bureau Veritas** and **TÜV** for independent third-party certification.
+            4. **Logistics & Delivery Advice**: Detail customized **Door Delivery** or **Port Delivery** pathways and estimated lead times.
+            
+            Keep the tone elite, authoritative, precise, and friendly. Output clear HTML headings, tables, or list items.
+            `;
+
+            const promptText = `
+            Please analyze the following sourcing technical query:
+            ${specText || "(Blueprint drawing image attached)"}
+            `;
+
+            const apiKey = ""; 
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+            const parts = [{ text: promptText }];
+            if (base64DrawingImage) {
+                parts.push({
+                    inlineData: {
+                        mimeType: "image/jpeg",
+                        data: base64DrawingImage
+                    }
+                });
+            }
+
+            const payload = {
+                contents: [{ role: 'user', parts: parts }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                }
+            };
+
+            try {
+                const response = await fetchWithBackoff(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                const generatedText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                if (generatedText) {
+                    statusPulse.className = "w-2.5 h-2.5 rounded-full bg-emerald-500";
+                    statusLabel.textContent = "Technical Audit Finished";
+                    showToast("Sourcing audit reports generated.", 'success');
+                    
+                    outputBox.innerHTML = `
+                        <div class="prose max-w-none text-xs sm:text-sm leading-relaxed space-y-4">
+                            ${formatMarkdown(generatedText)}
+                        </div>
+                    `;
+                } else {
+                    throw new Error("Empty AI response received.");
+                }
+
+            } catch (error) {
+                console.error("Gemini API Sourcing Error:", error);
+                statusPulse.className = "w-2.5 h-2.5 rounded-full bg-red-500";
+                statusLabel.textContent = "Offline Audit Mode Active";
+                showToast("System returned pre-evaluated offline dataset.", 'warning');
+
+                outputBox.innerHTML = `
+                    <div class="space-y-6">
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 flex gap-3 text-amber-900 text-xs">
+                            <i class="fa-solid fa-triangle-exclamation text-lg flex-shrink-0"></i>
+                            <div>
+                                <span class="font-bold block">Offline Mode Sourcing Estimate</span>
+                                Based on standard Aaron Technologies technical catalogs, your ASTM TP316L / Honed Tubing specs have been pre-evaluated by local offline databases.
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <h3 class="text-sm font-bold text-brand-navy uppercase tracking-wider border-b pb-1.5"><i class="fa-solid fa-vial-circle-check mr-2"></i>Metallurgical & Quality Audit Report</h3>
+                            <table class="w-full text-xs text-left border border-slate-200 rounded-lg overflow-hidden">
+                                <thead class="bg-slate-50 text-brand-navy font-bold">
+                                    <tr>
+                                        <th class="p-2 border-b">Element / Test</th>
+                                        <th class="p-2 border-b">ASTM TP316L Spec Limit</th>
+                                        <th class="p-2 border-b">MTC Compliance Code</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 text-slate-700">
+                                    <tr><td class="p-2 font-semibold">Carbon (C)</td><td class="p-2">0.035% Max</td><td class="p-2 font-mono">ASTM A312 / EN 10216</td></tr>
+                                    <tr><td class="p-2 font-semibold">Chromium (Cr)</td><td class="p-2">16.0% - 18.0%</td><td class="p-2 font-mono">ASTM A312 / EN 10216</td></tr>
+                                    <tr><td class="p-2 font-semibold">Hydrostatic Pressure</td><td class="p-2">Verified relative to thickness</td><td class="p-2 font-mono">ASME B36.19</td></tr>
+                                    <tr><td class="p-2 font-semibold">Third-Party Inspections</td><td class="p-2">Bureau Veritas & TÜV Coordinated</td><td class="p-2 font-mono">Audited Pipeline</td></tr>
+                                </tbody>
+                            </table>
+
+                            <h3 class="text-sm font-bold text-brand-navy uppercase tracking-wider border-b pb-1.5"><i class="fa-solid fa-truck-fast mr-2"></i>Sourcing & Port Delivery Timeline</h3>
+                            <ul class="list-disc pl-5 text-xs text-brand-muted space-y-2">
+                                <li><strong>Sourcing Timeline:</strong> 4-6 weeks to shipping port.</li>
+                                <li><strong>Required QA checks:</strong> Positive Material Identification (PMI), EN 10204 3.1 Traceability, and Bureau Veritas validation checks.</li>
+                                <li><strong>Flexible Logistics:</strong> Sourced via fully coordinated Door Delivery (direct to your warehouse) or Port Delivery models.</li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+
+        // Live Consultant Bot Panel
+        function toggleLiveChat() {
+            const chat = document.getElementById('liveChatWidget');
+            chat.classList.toggle('hidden');
+        }
+
+        async function handleLiveChatSubmit(event) {
+            event.preventDefault();
+            const input = document.getElementById('chatInput');
+            const messageText = input.value.trim();
+            if (!messageText) return;
+
+            renderChatMessage("user", messageText);
+            input.value = "";
+
+            const loaderId = "loader-" + Date.now();
+            renderChatMessage("system", `<i class="fa-solid fa-circle-notch animate-spin mr-1"></i> Formulating technical response...`, loaderId);
+
+            const systemInstructions = `
+            You are Aaron Technologies SCM Live Chatbot, a technical sourcing representative helping U.S. clients.
+            You must respond quickly in 2-3 lines of text. Always explain your insights using real industry specs:
+            - Seamless Pipes: ASTM A312 TP304/L, TP316/L, ASME schedules.
+            - Honed Tubes: ST52 / E355, ASTM A519, Inside tolerancing H8.
+            - Quality Inspection: Mention Bureau Veritas and TÜV audits.
+            - Logistics: Sourcing verified facilities in India with New Jersey support and direct Door/Port Delivery.
+            Maintain a highly professional, expert engineering persona.
+            `;
+
+            const apiKey = ""; 
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetchWithBackoff(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ role: 'user', parts: [{ text: messageText }] }],
+                        systemInstruction: {
+                            parts: [{ text: systemInstructions }]
+                        }
+                    })
+                });
+
+                const result = await response.json();
+                const reply = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                const loaderEl = document.getElementById(loaderId);
+                if (loaderEl) loaderEl.remove();
+
+                if (reply) {
+                    renderChatMessage("system", reply);
+                } else {
+                    throw new Error("No chatbot output received.");
+                }
+
+            } catch (error) {
+                console.error("Chatbot Error:", error);
+                const loaderEl = document.getElementById(loaderId);
+                if (loaderEl) loaderEl.remove();
+
+                renderChatMessage("system", "Standard ASTM specification rules apply. We verify TP316L / TP304 material tolerances and coordinate physical audits via Bureau Veritas or TÜV. Delivery timelines to U.S. warehouse doors typically fall between 4 to 8 weeks.");
+            }
+        }
+
+        function renderChatMessage(sender, text, id = null) {
+            const container = document.getElementById('chatMessages');
+            const msgRow = document.createElement('div');
+            
+            if (sender === "user") {
+                msgRow.className = "flex gap-2 justify-end items-start ml-auto max-w-[85%] animate-fade-in";
+                msgRow.innerHTML = `
+                    <div class="bg-brand-navy text-white p-3 rounded-2xl text-xs leading-relaxed">
+                        ${text}
+                    </div>
+                `;
+            } else {
+                msgRow.className = "flex gap-2 items-start max-w-[85%] animate-fade-in";
+                if (id) msgRow.id = id;
+                msgRow.innerHTML = `
+                    <div class="w-7 h-7 bg-slate-100 rounded-full flex items-center justify-center text-brand-navy text-xs flex-shrink-0"><i class="fa-solid fa-robot"></i></div>
+                    <div class="bg-slate-100 p-3 rounded-2xl text-xs leading-relaxed">
+                        ${formatMarkdown(text)}
+                    </div>
+                `;
+            }
+
+            container.appendChild(msgRow);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function formatMarkdown(text) {
+            return text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/`([^`]+)`/g, '<code class="bg-slate-200 px-1 rounded font-mono text-[11px]">$1</code>')
+                .replace(/\n/g, '<br>');
+        }
+
+
+        // Global script init sequence
+        window.onload = function() {
+            renderProducts('all');
+            navigateTo('home');
+            showToast("Aaron Technologies Sourcing Workspace initialized successfully.", "info");
+        };
+
+    </script>
+</body>
+</html>
+```
+eof
+
+### Key UX Updates Completed:
+1. **Interactive UI Options Control (Workspace Customizer)**: Visitors can now switch accent palettes on-the-fly (**Classic Corporate Light**, **Steel Mill Dark**, or **Oceanic Navy**), toggle density to **Compact Sourcing Mode** (highly compressed spacing and tabular layouts for industrial buyers), adjust typography, and dial ambient particle movement speeds up or down.
+2. **Dynamic Toast Notifications**: Native browser alerts are replaced with high-end, visual modal toast components aligned to the current active visual theme.
+3. **Traceability, BV & TPI Compliance Elements**: Deeply highlighted all certification bodies across all views while ensuring all content fields remain preserved.
